@@ -24,7 +24,7 @@ namespace GestaoDeCinema.Controllers
             return View(filmes);
         }
 
-        // ... podes deixar o resto (Privacy/Error) como estava ...
+       
         public IActionResult Privacy() { return View(); }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

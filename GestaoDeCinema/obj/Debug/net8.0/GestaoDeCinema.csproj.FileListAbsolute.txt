@@ -259,3 +259,4 @@ C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\bin\Debug\n
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\GestaoDeCinema.sourcelink.json

@@ -1,5 +1,5 @@
-using GestaoDeCinema.BD; // <--- O TEU CONTEXTO ESTÁ AQUI
-using GestaoDeCinema.Models; // Caso precise dos modelos
+using GestaoDeCinema.BD; 
+using GestaoDeCinema.Models; 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -8,11 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Adicionar serviços ao contentor.
 builder.Services.AddControllersWithViews();
 
-// --- AQUI ESTÁ A CORREÇÃO DO ERRO ---
-// Estamos a registar o CinemaContext para que o programa o encontre
+
 builder.Services.AddDbContext<CinemaContext>(options =>
     options.UseSqlite("Data Source=Cinema.db"));
-// ------------------------------------
+
 
 // Configuração de Login
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

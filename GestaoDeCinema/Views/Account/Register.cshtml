@@ -1,33 +1,195 @@
 ﻿@model GestaoDeCinema.Models.Utilizador
 
-@{ ViewData["Title"] = "Criar Conta"; }
+@{
+    Layout = null;
+    ViewData["Title"] = "Criar Conta";
+}
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h3>📝 Registo de Cliente</h3>
-                </div>
-                <div class="card-body">
-                    <form asp-action="Register">
-                        <div class="mb-3">
-                            <label>Nome:</label>
-                            <input asp-for="Nome" class="form-control" required />
-                        </div>
-                        <div class="mb-3">
-                            <label>Email:</label>
-                            <input asp-for="Email" type="email" class="form-control" required />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label>Password:</label>
-                            <input asp-for="Password" type="password" class="form-control" required />
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Criar Conta</button>
-                    </form>
-                </div>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --input-bg: #271c1f;
+            --input-border: #543b43;
+            --text-muted: #b99da6;
+        }
+
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-cinema {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2; 
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, var(--bg-dark) 0%, rgba(24, 17, 19, 0.8) 50%, transparent 100%);
+        }
+
+  
+        .form-control-custom {
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: white;
+            padding: 15px 15px 15px 50px; 
+            border-radius: 0.5rem;
+            height: 56px;
+        }
+
+        .form-control-custom:focus {
+            background-color: var(--input-bg);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(236, 19, 91, 0.25);
+        }
+
+        .form-control-custom::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Posicionamento dos ícones dentro do input */
+        .input-group-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            z-index: 5;
+            pointer-events: none; /* O clique passa através do ícone */
+        }
+
+        /* Botão Principal */
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            font-weight: 700;
+            height: 48px;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #c90f4d; /* Um pouco mais escuro */
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 19, 91, 0.4);
+        }
+
+        .text-custom-muted {
+            color: var(--text-muted);
+        }
+        
+        .link-custom {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .link-custom:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-cinema">
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop" class="bg-image" alt="Cinema Background">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100 position-relative">
+        
+        <div class="col-12 col-md-8 col-lg-5 col-xl-4">
+            
+            <div class="text-center mb-5">
+                <svg fill="none" height="64" viewBox="0 0 24 24" width="64" xmlns="http://www.w3.org/2000/svg" class="mb-3 d-inline-block">
+                    <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM8 11H6.5V10H8V11ZM8 9H6.5V8H8V9ZM8 7H6.5V6H8V7ZM15.5 17L14.5 13H9.5L8.5 17H6.75L9.63 6H14.38L17.25 17H15.5ZM17.5 11H16V10H17.5V11ZM17.5 9H16V8H17.5V9ZM17.5 7H16V6H17.5V7ZM10.25 11.5H13.75L12 7.5L10.25 11.5Z" fill="#ec135b"></path>
+                </svg>
+                <h1 class="fw-black mb-1 display-5 fw-bold">Criar Conta</h1>
+                <p class="text-custom-muted">Junte-se à nossa comunidade de cinema</p>
             </div>
+
+            <form asp-action="Register" class="w-100">
+                
+                <div class="mb-3">
+                    <label asp-for="Nome" class="form-label fw-medium mb-2">Nome Completo</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined input-group-icon">badge</span>
+                        <input asp-for="Nome" class="form-control form-control-custom" placeholder="Ex: João Silva" required />
+                    </div>
+                    <span asp-validation-for="Nome" class="text-danger small mt-1"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-medium mb-2">Email</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined input-group-icon">mail</span>
+                        <input asp-for="Email" type="email" class="form-control form-control-custom" placeholder="seu@email.com" required />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger small mt-1"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Password" class="form-label fw-medium mb-2">Palavra-passe</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined input-group-icon">lock</span>
+                        <input asp-for="Password" type="password" class="form-control form-control-custom" placeholder="Crie uma palavra-passe" required />
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger small mt-1"></span>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary-custom">
+                        Criar Conta
+                    </button>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-custom-muted small">
+                        Já tem conta? 
+                        <a asp-action="Login" class="link-custom fw-bold">Entrar</a>
+                    </p>
+                </div>
+
+            </form>
         </div>
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

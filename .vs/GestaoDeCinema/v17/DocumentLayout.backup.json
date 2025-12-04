@@ -7,52 +7,52 @@
       "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\filmescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\filmescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\models\\sessao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\models\\sessao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\wwwroot\\css\\cinematheme.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\wwwroot\\css\\cinematheme.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\migrations\\20251202144931_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\migrations\\20251202144931_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\models\\utilizador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\migrations\\20251202144931_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\migrations\\20251202144931_inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\models\\filme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\models\\filme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\controllers\\filmescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\controllers\\filmescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\bd\\cinemacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\bd\\cinemacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\models\\reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\models\\reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|c:\\users\\lenovo\\documents\\gestaocinema\\gestaodecinema\\gestaodecinema\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD665434-AEE0-48A5-AE19-CFBBEB6B16F3}|GestaoDeCinema\\GestaoDeCinema.csproj|solutionrelative:gestaodecinema\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,19 +62,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FilmesController.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\FilmesController.cs",
-              "RelativeDocumentMoniker": "GestaoDeCinema\\FilmesController.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\FilmesController.cs",
-              "RelativeToolTip": "GestaoDeCinema\\FilmesController.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAkwLIAAAABAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "cinemaTheme.css",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\wwwroot\\css\\cinemaTheme.css",
+              "RelativeDocumentMoniker": "GestaoDeCinema\\wwwroot\\css\\cinemaTheme.css",
+              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\wwwroot\\css\\cinemaTheme.css",
+              "RelativeToolTip": "GestaoDeCinema\\wwwroot\\css\\cinemaTheme.css",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-04T11:18:35.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Utilizador.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Utilizador.cs",
+              "RelativeDocumentMoniker": "GestaoDeCinema\\Models\\Utilizador.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Utilizador.cs",
+              "RelativeToolTip": "GestaoDeCinema\\Models\\Utilizador.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T21:32:35.132Z"
+              "WhenOpened": "2025-12-04T10:42:19.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "GestaoDeCinema\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "GestaoDeCinema\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T10:33:41.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "GestaoDeCinema\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "GestaoDeCinema\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-04T10:30:54.385Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -84,7 +124,7 @@
               "RelativeDocumentMoniker": "GestaoDeCinema\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "GestaoDeCinema\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAIwBUAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAAAKQAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-12-03T21:19:23.496Z",
               "EditorCaption": ""
@@ -97,61 +137,66 @@
               "RelativeDocumentMoniker": "GestaoDeCinema\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Controllers\\HomeController.cs",
               "RelativeToolTip": "GestaoDeCinema\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwCMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T21:18:55.809Z"
+              "WhenOpened": "2025-12-03T21:18:55.809Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "GestaoDeCinema\\Views\\Account\\Register.cshtml",
               "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Views\\Account\\Register.cshtml",
               "RelativeToolTip": "GestaoDeCinema\\Views\\Account\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-03T16:01:59.094Z"
+              "WhenOpened": "2025-12-03T16:01:59.094Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "GestaoDeCinema\\Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Controllers\\AccountController.cs",
               "RelativeToolTip": "GestaoDeCinema\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAMwEwAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T15:06:22.621Z"
+              "WhenOpened": "2025-12-02T15:06:22.621Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "20251202144931_Inicial.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
-              "RelativeDocumentMoniker": "GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
-              "RelativeToolTip": "GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAYwEwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:49:31.972Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Program.cs",
               "RelativeDocumentMoniker": "GestaoDeCinema\\Program.cs",
               "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Program.cs",
               "RelativeToolTip": "GestaoDeCinema\\Program.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAmwC0AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAACwAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:49:15.112Z"
+              "WhenOpened": "2025-12-02T14:49:15.112Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
+              "Title": "20251202144931_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
+              "RelativeDocumentMoniker": "GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
+              "RelativeToolTip": "GestaoDeCinema\\Migrations\\20251202144931_Inicial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T14:49:31.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "CinemaContext.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\BD\\CinemaContext.cs",
               "RelativeDocumentMoniker": "GestaoDeCinema\\BD\\CinemaContext.cs",
@@ -163,55 +208,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Sessao.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Sessao.cs",
-              "RelativeDocumentMoniker": "GestaoDeCinema\\Models\\Sessao.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Sessao.cs",
-              "RelativeToolTip": "GestaoDeCinema\\Models\\Sessao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "FilmesController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Controllers\\FilmesController.cs",
+              "RelativeDocumentMoniker": "GestaoDeCinema\\Controllers\\FilmesController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Controllers\\FilmesController.cs",
+              "RelativeToolTip": "GestaoDeCinema\\Controllers\\FilmesController.cs",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAkwLIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:36:05.398Z"
+              "WhenOpened": "2025-12-03T21:32:35.132Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "Reserva.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Reserva.cs",
-              "RelativeDocumentMoniker": "GestaoDeCinema\\Models\\Reserva.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Reserva.cs",
-              "RelativeToolTip": "GestaoDeCinema\\Models\\Reserva.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:28:02.591Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Filme.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Filme.cs",
-              "RelativeDocumentMoniker": "GestaoDeCinema\\Models\\Filme.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Filme.cs",
-              "RelativeToolTip": "GestaoDeCinema\\Models\\Filme.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:23:40.238Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Utilizador.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Utilizador.cs",
-              "RelativeDocumentMoniker": "GestaoDeCinema\\Models\\Utilizador.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Models\\Utilizador.cs",
-              "RelativeToolTip": "GestaoDeCinema\\Models\\Utilizador.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAwwBQAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:16:33.791Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\Documents\\GestaoCinema\\GestaoDeCinema\\GestaoDeCinema\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "GestaoDeCinema\\Views\\Shared\\_Layout.cshtml",

@@ -8,7 +8,7 @@ namespace GestaoDeCinema.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O nome é obrigatório")]
-        public string Nome { get; set; }  // <--- Confirma que tens isto aqui!
+        public string Nome { get; set; }
 
         [Required]
         [EmailAddress]
@@ -20,7 +20,6 @@ namespace GestaoDeCinema.Models
 
         public string Funcao { get; set; }
 
-        // Se tiveres reservas, adiciona isto, senão pode dar erro noutros lados
-        // public virtual ICollection<Reserva> Reservas { get; set; }
+        
     }
 }

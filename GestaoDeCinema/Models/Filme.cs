@@ -18,20 +18,20 @@ namespace GestaoDeCinema.Models
 
         public string Sinopse { get; set; }
 
-        // --- SISTEMA DE IMAGEM ---
+        
 
         // 1. Caminho da Imagem (O que vai para a Base de Dados)
-        // Exemplo guardado: "\imagens\batman.jpg"
+        
         [Display(Name = "Capa Atual")]
         public string? CapaImagem { get; set; }
 
-        // 2. O Ficheiro em si (O que vem do formulário)
+      
         // O [NotMapped] diz à BD: "Ignora isto, serve só para transportar o ficheiro até à pasta"
         [NotMapped]
         [Display(Name = "Carregar Nova Imagem")]
         public IFormFile? FicheiroImagem { get; set; }
 
-        // -------------------------
+        
 
         public virtual ICollection<Sessao> Sessoes { get; set; }
     }
