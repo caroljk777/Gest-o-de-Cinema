@@ -1,0 +1,33 @@
+﻿@model GestaoDeCinema.Models.Utilizador
+
+@{ ViewData["Title"] = "Criar Conta"; }
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3>📝 Registo de Cliente</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Register">
+                        <div class="mb-3">
+                            <label>Nome:</label>
+                            <input asp-for="Nome" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Email:</label>
+                            <input asp-for="Email" type="email" class="form-control" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label>Password:</label>
+                            <input asp-for="Password" type="password" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Criar Conta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
