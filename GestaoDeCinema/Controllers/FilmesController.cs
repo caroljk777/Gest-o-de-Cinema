@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestaoDeCinema.BD;
 using GestaoDeCinema.Models;
-using System.IO; // <--- NOVA BIBLIOTECA IMPORTANTE!
+using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
-namespace GestaoDeCinema.Controllers // Confirma se o namespace está certo
+namespace GestaoDeCinema.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class FilmesController : Controller
     {
         private readonly CinemaContext _context;

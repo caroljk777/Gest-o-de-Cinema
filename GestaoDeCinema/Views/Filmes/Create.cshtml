@@ -1,53 +1,85 @@
 ﻿@model GestaoDeCinema.Models.Filme
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar Filme";
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+    <style>
+        body { background-color: #181113; color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .form-container { max-width: 700px; margin: 40px auto; padding: 30px; background-color: #1e1e1e; border-radius: 12px; border: 1px solid #333; }
+        .form-label { font-weight: 600; color: #a0a0a0; margin-bottom: 8px; }
+        .form-control, .form-select { background-color: #2a2a2a; border: 1px solid #333; color: white; border-radius: 8px; }
+        .form-control:focus, .form-select:focus { background-color: #2a2a2a; border-color: #ec135b; color: white; box-shadow: 0 0 0 0.25rem rgba(236, 19, 91, 0.25); }
+        .btn-primary-custom { background-color: #ec135b; color: white; font-weight: 600; border: none; border-radius: 8px; padding: 10px 24px; }
+        .btn-primary-custom:hover { background-color: #c90f4d; }
+        .btn-secondary-custom { background-color: transparent; border: 1px solid #333; color: #a0a0a0; border-radius: 8px; padding: 10px 24px; }
+        .btn-secondary-custom:hover { background-color: #2a2a2a; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h3 fw-bold">@ViewData["Title"]</h2>
+                <a asp-action="Index" class="btn-secondary-custom">Cancelar</a>
+            </div>
 
-<h4>Filme</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Genero" class="control-label"></label>
-                <input asp-for="Genero" class="form-control" />
-                <span asp-validation-for="Genero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Duracao" class="control-label"></label>
-                <input asp-for="Duracao" class="form-control" />
-                <span asp-validation-for="Duracao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sinopse" class="control-label"></label>
-                <input asp-for="Sinopse" class="form-control" />
-                <span asp-validation-for="Sinopse" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CapaImagem" class="control-label"></label>
-                <input asp-for="CapaImagem" class="form-control" />
-                <span asp-validation-for="CapaImagem" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label">Título do Filme</label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Ex: O Padrinho" required />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Genero" class="form-label">Género</label>
+                        <input asp-for="Genero" class="form-control" placeholder="Ex: Drama, Ação" />
+                        <span asp-validation-for="Genero" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Duracao" class="form-label">Duração (minutos)</label>
+                        <input asp-for="Duracao" type="number" class="form-control" placeholder="Ex: 120" />
+                        <span asp-validation-for="Duracao" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Sinopse" class="form-label">Sinopse</label>
+                    <textarea asp-for="Sinopse" class="form-control" rows="4" placeholder="Breve descrição do filme..."></textarea>
+                    <span asp-validation-for="Sinopse" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="ficheiroImagem" class="form-label">Imagem de Capa</label>
+                    <input type="file" name="ficheiroImagem" id="ficheiroImagem" class="form-control" accept="image/*" />
+                    <div class="form-text text-muted small">Formatos aceites: JPG, PNG, GIF. Tamanho máximo: 5MB</div>
+                </div>
+
+                <hr class="my-4" style="border-color: #333;">
+
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn-primary-custom">Adicionar Filme</button>
+                    <a asp-action="Index" class="btn-secondary-custom">Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

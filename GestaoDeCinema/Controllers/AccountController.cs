@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using GestaoDeCinema.BD;      // <--- Confirma se a tua pasta se chama BD ou Data
+using GestaoDeCinema.BD;
 using GestaoDeCinema.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoDeCinema.Controllers
 {
@@ -24,16 +25,17 @@ namespace GestaoDeCinema.Controllers
 
         // --- AÇÃO DE REGISTAR (POST) ---
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(Utilizador utilizador)
         {
-            
-            if (_context.Utilizadores.Any(u => u.Email == utilizador.Email))
+            // 1. Verificar se o email já existe
+            if (await _context.Utilizadores.AnyAsync(u => u.Email == utilizador.Email))
             {
                 ModelState.AddModelError("Email", "Este email já está registado.");
                 return View(utilizador);
             }
 
-            // Se o email for este, ganha poderes de chefe
+            // 2. Definir função baseado no email
             if (utilizador.Email.ToLower() == "admin@cinema.com")
             {
                 utilizador.Funcao = "Administrador";
@@ -44,13 +46,10 @@ namespace GestaoDeCinema.Controllers
             }
 
             // 3. Guardar na Base de Dados
-            if (ModelState.IsValid)
-            {
-                _context.Utilizadores.Add(utilizador);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Login");
-            }
-            return View(utilizador);
+            _context.Utilizadores.Add(utilizador);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction("Login");
         }
 
         // --- PÁGINA DE LOGIN (GET) ---
@@ -64,7 +63,7 @@ namespace GestaoDeCinema.Controllers
         public async Task<IActionResult> Login(string email, string password)
         {
             // 1. Procurar o utilizador
-            var user = _context.Utilizadores.FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = await _context.Utilizadores.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             if (user != null)
             {
@@ -73,15 +72,23 @@ namespace GestaoDeCinema.Controllers
                 {
                     new Claim(ClaimTypes.Name, user.Nome),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Funcao) // Importante: Guarda se é Admin ou Cliente
+                    new Claim(ClaimTypes.Role, user.Funcao)
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                // 3. Criar o Cookie de Login (Entrada no sistema)
+                // 3. Criar o Cookie de Login
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                return RedirectToAction("Index", "Home");
+                // 4. Redirecionar baseado na função
+                if (user.Funcao == "Administrador")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             ViewBag.Erro = "Email ou Password incorretos";

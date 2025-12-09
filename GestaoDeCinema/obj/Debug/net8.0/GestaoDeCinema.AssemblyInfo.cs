@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestaoDeCinema")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb427c5d50c6ce650fd19b93c062218fe802b74c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09f27c4c639762592d406baa7c5d18c8592e305c")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestaoDeCinema")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestaoDeCinema")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

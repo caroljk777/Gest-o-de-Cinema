@@ -23,7 +23,6 @@ C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\n
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\GestaoDeCinema.dll
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\refint\GestaoDeCinema.dll
 C:\Users\Lenovo\Documents\GestaoCinema\GestaoDeCinema\GestaoDeCinema\obj\Debug\net8.0\GestaoDeCinema.pdb

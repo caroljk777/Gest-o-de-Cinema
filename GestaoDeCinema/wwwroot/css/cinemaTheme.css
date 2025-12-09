@@ -1,5 +1,4 @@
-﻿:root
-{
+﻿:root {
     --primary-color: #ec135b;
     --primary-hover: #c90f4d;
     --bg-dark: #181113;
@@ -8,80 +7,66 @@
     --card-hover: rgba(255, 255, 255, 0.05);
 }
 
-body 
-{
+body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: var(--bg-dark);
     color: white;
     min-height: 100vh;
 }
 
-.text-primary-custom 
-{
+.text-primary-custom {
     color: var(--primary-color) !important;
 }
 
-.bg-primary-custom 
-{
+.bg-primary-custom {
     background-color: var(--primary-color) !important;
 }
 
-.text-white-60 
-{
+.text-white-60 {
     color: var(--text-muted);
 }
 
-.btn-primary-custom 
-{
+.btn-primary-custom {
     background-color: var(--primary-color);
     border: none;
     color: white;
     font-weight: 700;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
-    transition: all 0.2s;
 }
 
-     .btn-primary-custom:hover
-    {
-        background-color: var(--primary-hover);
-        color: white;
-    }
+.btn-primary-custom:hover {
+    background-color: var(--primary-hover);
+    color: white;
+}
 
-.btn-outline-custom 
-{
+.btn-outline-custom {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     font-weight: 700;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    transition: all 0.2s;
 }
 
-    .btn-outline-custom:hover
-    {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: white;
-    }
+.btn-outline-custom:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
 
-    header 
-    {
+header {
     border-bottom: 1px solid var(--border-color);
-    }
+}
 
 
-.movie-card 
-{
+.movie-card {
     border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.2s;
     border-radius: 0.5rem;
 }
 
-    .movie-card:hover
-    {
-        background-color: var(--card-hover);
-    }
+.movie-card:hover {
+    background-color: var(--card-hover);
+}
 
 
 .movie-poster {

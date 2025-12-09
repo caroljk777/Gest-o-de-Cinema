@@ -15,7 +15,7 @@ namespace GestaoDeCinema.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.11");
 
             modelBuilder.Entity("GestaoDeCinema.Models.Filme", b =>
                 {
@@ -106,6 +106,10 @@ namespace GestaoDeCinema.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Funcao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
