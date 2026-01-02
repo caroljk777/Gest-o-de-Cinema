@@ -1,0 +1,252 @@
+@model GestaoDeCinema.Models.Sessao
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Escolher Assento";
+    var assentosReservados = ViewBag.AssentosReservados as List<string> ?? new List<string>();
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .main-content {
+            padding: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .screen {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            border-radius: 50%;
+            margin: 20px 0 40px;
+            box-shadow: 0 4px 20px rgba(236, 19, 91, 0.5);
+        }
+
+        .seats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .seat-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .row-label {
+            width: 30px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .seat {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px 8px 0 0;
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-card);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .seat:hover:not(.reserved):not(.selected) {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .seat.selected {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .seat.reserved {
+            background-color: #444;
+            border-color: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .legend {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-confirmar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #c90f4d 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .btn-confirmar:disabled {
+            background: #444;
+            cursor: not-allowed;
+        }
+
+        .info-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        
+        <div class="info-card">
+            <h5 class="fw-bold mb-2">@Model.Filme.Titulo</h5>
+            <p class="text-muted small mb-0">
+                <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">schedule</span>
+                @Model.Hora.ToString("dddd, dd 'de' MMMM 'às' HH:mm", new System.Globalization.CultureInfo("pt-PT"))
+            </p>
+        </div>
+
+        <h5 class="fw-bold mb-3 text-center">Escolha seu Assento</h5>
+
+        <div class="text-center mb-3">
+            <small class="text-muted">TELA</small>
+        </div>
+        <div class="screen"></div>
+
+        <div class="seats-container">
+            @{
+                var rows = new[] { "A", "B", "C", "D", "E", "F" };
+                var seatsPerRow = 10;
+            }
+
+            @foreach (var row in rows)
+            {
+                <div class="seat-row">
+                    <div class="row-label">@row</div>
+                    @for (int i = 1; i <= seatsPerRow; i++)
+                    {
+                        var seatId = $"{row}{i}";
+                        var isReserved = assentosReservados.Contains(seatId);
+                        
+                        <div class="seat @(isReserved ? "reserved" : "")" 
+                             data-seat="@seatId"
+                             @(isReserved ? "" : "onclick=\"selectSeat(this)\"")>
+                            @i
+                        </div>
+                    }
+                    <div class="row-label">@row</div>
+                </div>
+            }
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background-color: var(--bg-card);"></div>
+                <span class="small text-muted">Disponível</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background-color: var(--primary-color); border-color: var(--primary-color);"></div>
+                <span class="small text-muted">Selecionado</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background-color: #444; opacity: 0.5;"></div>
+                <span class="small text-muted">Reservado</span>
+            </div>
+        </div>
+
+        <form asp-action="Confirmar" method="post" id="reservaForm">
+            <input type="hidden" name="sessaoId" value="@Model.Id" />
+            <input type="hidden" name="assento" id="assentoInput" />
+            
+            <button type="submit" class="btn-confirmar" id="btnConfirmar" disabled>
+                Confirmar Reserva - @Model.Preco.ToString("C")
+            </button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="@Url.Action("EscolherSessao", new { id = Model.FilmeId })" class="text-muted text-decoration-none">
+                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">arrow_back</span>
+                Voltar aos Horários
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        let selectedSeat = null;
+
+        function selectSeat(element) {
+            if (element.classList.contains('reserved')) return;
+
+            // Desmarcar anterior
+            if (selectedSeat) {
+                selectedSeat.classList.remove('selected');
+            }
+
+            // Marcar novo
+            element.classList.add('selected');
+            selectedSeat = element;
+
+            // Atualizar form
+            const seatId = element.getAttribute('data-seat');
+            document.getElementById('assentoInput').value = seatId;
+            document.getElementById('btnConfirmar').disabled = false;
+            document.getElementById('btnConfirmar').textContent = `Confirmar Assento ${seatId} - @Model.Preco.ToString("C")`;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

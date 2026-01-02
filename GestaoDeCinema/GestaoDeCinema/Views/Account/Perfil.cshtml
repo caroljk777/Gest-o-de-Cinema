@@ -1,0 +1,143 @@
+@model GestaoDeCinema.Models.Utilizador
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Meu Perfil";
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .main-content {
+            padding: 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card-perfil {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .form-control-dark {
+            background-color: #2a2a2a;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .form-control-dark:focus {
+            background-color: #2a2a2a;
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(236, 19, 91, 0.25);
+        }
+
+        .btn-salvar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #c90f4d 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        
+        <div class="mb-4">
+            <h1 class="h3 fw-bold text-white mb-1">⚙️ Meu Perfil</h1>
+            <p class="text-muted mb-0">Atualize suas informações pessoais</p>
+        </div>
+
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Sucesso"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Erro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <div class="card-perfil">
+            <form asp-action="Perfil" method="post">
+                
+                <div class="mb-3">
+                    <label class="form-label fw-medium">Nome Completo</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined position-absolute" style="left: 12px; top: 12px; color: var(--text-muted);">person</span>
+                        <input type="text" name="nome" value="@Model.Nome" class="form-control-dark ps-5" required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-medium">Email</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined position-absolute" style="left: 12px; top: 12px; color: var(--text-muted);">mail</span>
+                        <input type="email" name="email" value="@Model.Email" class="form-control-dark ps-5" required />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-medium">Nova Password</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined position-absolute" style="left: 12px; top: 12px; color: var(--text-muted);">lock</span>
+                        <input type="password" name="password" class="form-control-dark ps-5" placeholder="Deixe em branco para manter a atual" />
+                    </div>
+                    <small class="text-muted">Apenas preencha se quiser alterar a password</small>
+                </div>
+
+                <button type="submit" class="btn-salvar">
+                    Salvar Alterações
+                </button>
+            </form>
+        </div>
+
+        <div class="mt-4 text-center">
+            <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none">
+                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">arrow_back</span>
+                Voltar ao Início
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

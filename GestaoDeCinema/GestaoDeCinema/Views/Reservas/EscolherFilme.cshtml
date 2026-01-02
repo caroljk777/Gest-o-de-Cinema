@@ -1,0 +1,123 @@
+@model IEnumerable<GestaoDeCinema.Models.Filme>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Escolher Filme";
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .main-content {
+            padding: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filme-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .filme-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 24px rgba(236, 19, 91, 0.3);
+        }
+
+        .filme-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .filme-info {
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        
+        <div class="mb-4">
+            <h1 class="h3 fw-bold text-white mb-1">🎬 Escolha um Filme</h1>
+            <p class="text-muted mb-0">Selecione o filme que deseja assistir</p>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var filme in Model)
+            {
+                <div class="col-md-3">
+                    <a href="@Url.Action("EscolherSessao", new { id = filme.Id })" class="filme-card">
+                        @if (!string.IsNullOrEmpty(filme.CapaImagem))
+                        {
+                            <img src="/imagens/@filme.CapaImagem" alt="@filme.Titulo" class="filme-poster" />
+                        }
+                        else
+                        {
+                            <div class="filme-poster d-flex align-items-center justify-content-center">
+                                <span class="material-symbols-outlined" style="font-size: 64px; opacity: 0.3;">movie</span>
+                            </div>
+                        }
+                        <div class="filme-info">
+                            <h6 class="fw-bold mb-1">@filme.Titulo</h6>
+                            <p class="text-muted small mb-2">@filme.Genero • @filme.Duracao min</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <span class="material-symbols-outlined" style="font-size: 64px; color: var(--text-muted);">movie</span>
+                <h5 class="text-muted mt-3">Nenhum filme disponível</h5>
+                <p class="text-muted">Não há filmes com sessões no momento.</p>
+            </div>
+        }
+
+        <div class="mt-4">
+            <a asp-controller="Reservas" asp-action="Index" class="text-muted text-decoration-none">
+                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">arrow_back</span>
+                Voltar às Minhas Reservas
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

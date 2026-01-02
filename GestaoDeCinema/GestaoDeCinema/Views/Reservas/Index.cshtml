@@ -1,0 +1,184 @@
+@model IEnumerable<GestaoDeCinema.Models.Reserva>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Minhas Reservas";
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .main-content {
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card-reserva {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: transform 0.2s;
+        }
+
+        .card-reserva:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-color);
+        }
+
+        .badge-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-confirmada {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .status-cancelada {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+
+        .btn-nova-reserva {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #c90f4d 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-nova-reserva:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 fw-bold text-white mb-1">🎬 Minhas Reservas</h1>
+                <p class="text-muted mb-0">Gerencie suas reservas de cinema</p>
+            </div>
+            <a asp-controller="Reservas" asp-action="EscolherFilme" class="btn-nova-reserva">
+                <span class="material-symbols-outlined">add</span>
+                Nova Reserva
+            </a>
+        </div>
+
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Sucesso"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Erro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (Model.Any())
+        {
+            @foreach (var reserva in Model)
+            {
+                <div class="card-reserva">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="fw-bold text-white mb-2">@reserva.Sessao.Filme.Titulo</h5>
+                            <div class="d-flex flex-wrap gap-3 text-muted small">
+                                <span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">calendar_today</span>
+                                    @reserva.Sessao.Hora.ToString("dd/MM/yyyy HH:mm")
+                                </span>
+                                <span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">event_seat</span>
+                                    Assento @reserva.Assento
+                                </span>
+                                <span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">confirmation_number</span>
+                                    @reserva.QuantidadeBilhetes bilhete(s)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="mb-2">
+                                <span class="badge-status @(reserva.Status == "Confirmada" ? "status-confirmada" : "status-cancelada")">
+                                    @reserva.Status
+                                </span>
+                            </div>
+                            <h5 class="text-primary-custom fw-bold mb-2">@reserva.PrecoTotal.ToString("C")</h5>
+                            @if (reserva.Status == "Confirmada")
+                            {
+                                <form asp-action="Cancelar" asp-route-id="@reserva.Id" method="post" style="display:inline;" 
+                                      onsubmit="return confirm('Tem certeza que deseja cancelar esta reserva?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <span class="material-symbols-outlined" style="font-size: 64px; color: var(--text-muted);">receipt_long</span>
+                <h5 class="text-muted mt-3">Nenhuma reserva encontrada</h5>
+                <p class="text-muted">Faça sua primeira reserva clicando no botão acima!</p>
+            </div>
+        }
+
+        <div class="mt-4">
+            <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none">
+                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">arrow_back</span>
+                Voltar ao Início
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

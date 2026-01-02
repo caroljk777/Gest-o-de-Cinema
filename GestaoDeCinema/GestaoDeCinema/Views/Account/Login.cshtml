@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Entrar";
+}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gestão de Cinema</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/loginTheme.css" />
+
+</head>
+<body>
+
+    <div class="bg-cinema">
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop" class="bg-image" alt="Cinema Background">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100 position-relative">
+        
+        <div class="col-12 col-md-8 col-lg-5 col-xl-4">
+            
+            <div class="text-center mb-5">
+                <svg fill="none" height="64" viewBox="0 0 24 24" width="64" xmlns="http://www.w3.org/2000/svg" class="mb-3 d-inline-block">
+                    <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM8 11H6.5V10H8V11ZM8 9H6.5V8H8V9ZM8 7H6.5V6H8V7ZM15.5 17L14.5 13H9.5L8.5 17H6.75L9.63 6H14.38L17.25 17H15.5ZM17.5 11H16V10H17.5V11ZM17.5 9H16V8H17.5V9ZM17.5 7H16V6H17.5V7ZM10.25 11.5H13.75L12 7.5L10.25 11.5Z" fill="#ec135b"></path>
+                </svg>
+                <h1 class="fw-black mb-1 display-5 fw-bold">Bem-vindo</h1>
+                <p class="text-custom-muted">Aceda à sua conta de cinema</p>
+            </div>
+
+            @if (ViewBag.Erro != null)
+            {
+                <div class="alert alert-custom-danger d-flex align-items-center mb-4" role="alert">
+                    <span class="material-symbols-outlined me-2">error</span>
+                    <div>@ViewBag.Erro</div>
+                </div>
+            }
+
+            <form asp-action="Login" method="post" class="w-100">
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-medium mb-2">Email</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined input-group-icon">mail</span>
+                        <input type="email" id="email" name="email" class="form-control form-control-custom" placeholder="seu@email.com" required />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label fw-medium mb-2">Palavra-passe</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined input-group-icon">lock</span>
+                        <input type="password" id="password" name="password" class="form-control form-control-custom" placeholder="Sua palavra-passe" required />
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary-custom">
+                        Entrar
+                    </button>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-custom-muted small">
+                        Não tem conta? 
+                        <a asp-action="Register" class="link-custom fw-bold">Criar conta</a>
+                    </p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

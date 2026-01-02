@@ -1,0 +1,207 @@
+﻿@model IEnumerable<GestaoDeCinema.Models.Filme>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Cinema - Filmes em Cartaz";
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .btn-auth {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: white;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #c90f4d 100%);
+            border: none;
+            color: white;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .hero {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(236, 19, 91, 0.1) 0%, transparent 100%);
+        }
+
+        .filme-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .filme-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 32px rgba(236, 19, 91, 0.3);
+        }
+
+        .filme-poster {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .filme-info {
+            padding: 20px;
+        }
+
+        .badge-genero {
+            background-color: rgba(236, 19, 91, 0.2);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header com Login/Registar -->
+    <div class="header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="material-symbols-outlined text-primary-custom" style="font-size: 32px;">movie</span>
+                        <h1 class="h4 fw-bold mb-0">Cinema</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a asp-controller="Account" asp-action="Login" class="btn-auth btn-login me-2">
+                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">login</span>
+                        Entrar
+                    </a>
+                    <a asp-controller="Account" asp-action="Register" class="btn-auth btn-register">
+                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">person_add</span>
+                        Criar Conta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h2 class="display-4 fw-bold mb-3">🎬 Filmes em Cartaz</h2>
+            <p class="lead text-muted">Descubra os melhores filmes disponíveis no nosso cinema</p>
+        </div>
+    </div>
+
+    <!-- Filmes Grid -->
+    <div class="container py-5">
+        @if (Model.Any())
+        {
+            <div class="row g-4">
+                @foreach (var filme in Model)
+                {
+                    <div class="col-md-4 col-lg-3">
+                        <div class="filme-card">
+                            @if (!string.IsNullOrEmpty(filme.CapaImagem))
+                            {
+                                <img src="/imagens/@filme.CapaImagem" alt="@filme.Titulo" class="filme-poster" />
+                            }
+                            else
+                            {
+                                <div class="filme-poster d-flex align-items-center justify-content-center">
+                                    <span class="material-symbols-outlined" style="font-size: 80px; opacity: 0.3;">theaters</span>
+                                </div>
+                            }
+                            <div class="filme-info">
+                                <h5 class="fw-bold mb-2">@filme.Titulo</h5>
+                                <div class="mb-2">
+                                    <span class="badge-genero">@filme.Genero</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 text-muted small">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+                                    @filme.Duracao min
+                                </div>
+                                @if (!string.IsNullOrEmpty(filme.Sinopse))
+                                {
+                                    <p class="text-muted small mt-2 mb-0" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                        @filme.Sinopse
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <span class="material-symbols-outlined" style="font-size: 80px; color: var(--text-muted);">movie</span>
+                <h4 class="text-muted mt-3">Nenhum filme disponível no momento</h4>
+                <p class="text-muted">Em breve teremos novidades!</p>
+            </div>
+        }
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center py-4 mt-5" style="border-top: 1px solid var(--border-color);">
+        <p class="text-muted mb-0">© 2026 Cinema - Gestão de Cinema</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
