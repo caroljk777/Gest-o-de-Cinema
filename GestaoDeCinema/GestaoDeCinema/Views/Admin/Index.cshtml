@@ -1,4 +1,4 @@
-﻿@model GestaoDeCinema.Models.AdminDashboardViewModel
+@model GestaoDeCinema.Models.AdminDashboardViewModel
 
 @{
     Layout = null;
@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
    
-    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css?v=2" />
 
     <style>
         :root {
@@ -67,7 +67,7 @@
             font-size: 22px;
         }
 
-        /* Conteúdo Principal */
+        /* Conteãdo Principal */
         .main-content {
             margin-left: 260px; /* Largura da sidebar */
             padding: 24px;
@@ -83,7 +83,7 @@
             z-index: 900;
         }
 
-        /* Cards de Estatísticas */
+        /* Cards de Estatãsticas */
         .stat-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -125,6 +125,10 @@
         }
 
         .table-custom tr:last-child td { border-bottom: none; }
+        
+        /* Forãar fundo escuro na tabela Bootstrap */
+        .table-custom tbody tr { background-color: var(--bg-card) !important; }
+        .table-custom tbody td { color: white !important; }
 
         /* Inputs de Pesquisa */
         .form-control-dark {
@@ -139,7 +143,7 @@
             box-shadow: none;
         }
 
-        /* Botões de Ação */
+        /* Botães de Aãão */
         .btn-action {
             width: 32px;
             height: 32px;
@@ -159,6 +163,19 @@
         .btn-action.delete:hover {
             background-color: #dc3545;
         }
+        
+        /* Forãar fundo escuro em TODAS as tabelas - override Bootstrap */
+        .table, .table > tbody > tr, .table > thead > tr, .table > tfoot > tr {
+            background-color: var(--bg-card) !important;
+        }
+        .table > tbody > tr > td, .table > thead > tr > th, .table > tfoot > tr > td {
+            background-color: transparent !important;
+            color: white !important;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) > * {
+            --bs-table-bg-type: var(--bg-card) !important;
+            background-color: var(--bg-card) !important;
+        }
 
     </style>
 </head>
@@ -166,7 +183,7 @@
 
     <aside class="sidebar d-flex flex-column">
         <div class="d-flex align-items-center gap-3 px-4 py-4 mb-2">
-            <img src="~/imagens/iconn.png" style="height: 40px; border-radius: 6px;" alt="Logo">
+            <img src="~/imagens/logo_cinema.jpg" style="height: 40px; border-radius: 6px;" alt="Logo">
             <h1 class="h5 fw-bold mb-0 text-white">Admin Cinema</h1>
         </div>
 
@@ -183,7 +200,7 @@
                 <span class="material-symbols-outlined">movie_filter</span>
                 Sessões
             </a>
-            <a asp-controller="Reservas" asp-action="Index" class="nav-link mb-1">
+            <a asp-controller="Admin" asp-action="VerReservas" class="nav-link mb-1">
                 <span class="material-symbols-outlined">confirmation_number</span>
                 Reservas
             </a>
@@ -210,22 +227,16 @@
     <div class="main-content">
         
         <header class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="h5 fw-bold mb-0">Painel de Administração</h2>
+            <h2 class="h5 fw-bold mb-0">Painel de Administraãão</h2>
             
             <div class="d-flex align-items-center gap-4">
-                <div class="position-relative d-none d-sm-block">
-                    <span class="material-symbols-outlined position-absolute text-muted" style="left: 10px; top: 8px; font-size: 20px;">search</span>
-                    <input type="text" class="form-control form-control-dark ps-5 rounded-3" placeholder="Procurar...">
-                </div>
                 
                 <div class="d-flex align-items-center gap-3">
                     <div class="text-end d-none d-md-block">
                         <p class="mb-0 small fw-bold text-white">@User.Identity.Name</p>
                         <p class="mb-0 small text-muted" style="font-size: 11px;">Administrador</p>
                     </div>
-                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white fw-bold" style="width: 40px; height: 40px;">
-                        A
-                    </div>
+
                 </div>
             </div>
         </header>
@@ -233,7 +244,7 @@
         <div class="row g-4 mb-5">
             <div class="col-md-4">
                 <div class="stat-card">
-                    <p class="text-muted fw-medium mb-1">Total de Filmes</p>
+                    <p class="text-white fw-medium mb-1">Total de Filmes</p>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold text-white mb-0">@Model.TotalFilmes</h3>
                         <span class="text-success small fw-bold d-flex align-items-center">
@@ -244,7 +255,7 @@
             </div>
             <div class="col-md-4">
                 <div class="stat-card">
-                    <p class="text-muted fw-medium mb-1">Total de Sessões</p>
+                    <p class="text-white fw-medium mb-1">Total de Sessões</p>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold text-white mb-0">@Model.TotalSessoes</h3>
                         <span class="text-primary-custom small fw-bold">Programadas</span>
@@ -253,7 +264,7 @@
             </div>
             <div class="col-md-4">
                 <div class="stat-card">
-                    <p class="text-muted fw-medium mb-1">Utilizadores</p>
+                    <p class="text-white fw-medium mb-1">Utilizadores</p>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold text-white mb-0">@Model.TotalUtilizadores</h3>
                         <span class="text-primary-custom small fw-bold">Registados</span>
@@ -277,9 +288,7 @@
                         <th class="ps-4">Capa</th>
                         <th>Título</th>
                         <th>Género</th>
-                        <th>Duração</th>
-                        <th class="text-end pe-4">Ações</th>
-                    </tr>
+                        <th>Duração</th></tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.FilmesRecentes)

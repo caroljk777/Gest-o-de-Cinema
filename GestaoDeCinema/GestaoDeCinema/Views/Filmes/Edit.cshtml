@@ -1,4 +1,4 @@
-ï»¿@model GestaoDeCinema.Models.Filme
+@model GestaoDeCinema.Models.Filme
 
 @{
     ViewData["Title"] = "Editar Filme";
@@ -11,7 +11,7 @@
     <title>@ViewData["Title"]</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css" asp-append-version="true" />
     <style>
         body { background-color: #181113; color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
         .form-container { max-width: 700px; margin: 40px auto; padding: 30px; background-color: #1e1e1e; border-radius: 12px; border: 1px solid #333; }
@@ -36,18 +36,18 @@
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                 <div class="mb-3">
-                    <label asp-for="Titulo" class="form-label">TÃ­tulo do Filme</label>
+                    <label asp-for="Titulo" class="form-label">Título do Filme</label>
                     <input asp-for="Titulo" class="form-control" required />
                     <span asp-validation-for="Titulo" class="text-danger"></span>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label asp-for="Genero" class="form-label">GÃ©nero</label>
+                        <label asp-for="Genero" class="form-label">Género</label>
                         <input asp-for="Genero" class="form-control" />
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label asp-for="Duracao" class="form-label">DuraÃ§Ã£o (minutos)</label>
+                        <label asp-for="Duracao" class="form-label">Duração (minutos)</label>
                         <input asp-for="Duracao" type="number" class="form-control" />
                     </div>
                 </div>
@@ -78,15 +78,16 @@
                 <hr class="my-4" style="border-color: #333;">
 
                 <div class="d-flex gap-3">
-                    <button type="submit" class="btn-primary-custom">Guardar AlteraÃ§Ãµes</button>
+                    <button type="submit" class="btn-primary-custom">Guardar Alterações</button>
                     <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
                 </div>
             </form>
         </div>
     </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation/1.17.0/additional-methods.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

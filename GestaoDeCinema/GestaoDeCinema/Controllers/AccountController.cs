@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using GestaoDeCinema.Extensions;
 
 namespace GestaoDeCinema.Controllers
 {
@@ -26,16 +27,23 @@ namespace GestaoDeCinema.Controllers
         // --- AÇÃO DE REGISTAR (POST) ---
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(Utilizador utilizador)
+        public async Task<IActionResult> Register(Utilizador utilizador, string confirmPassword)
         {
-            // 1. Verificar se o email já existe
+            // 1. Validar confirmação de password
+            if (utilizador.Password != confirmPassword)
+            {
+                ModelState.AddModelError("", "As palavras-passe não coincidem.");
+                return View(utilizador);
+            }
+            
+            // 2. Verificar se o email já existe
             if (await _context.Utilizadores.AnyAsync(u => u.Email == utilizador.Email))
             {
                 ModelState.AddModelError("Email", "Este email já está registado.");
                 return View(utilizador);
             }
 
-            // 2. Definir função baseado no email
+            // 3. Definir função baseado no email
             if (utilizador.Email.ToLower() == "admin@cinema.com")
             {
                 utilizador.Funcao = "Administrador";
@@ -45,7 +53,7 @@ namespace GestaoDeCinema.Controllers
                 utilizador.Funcao = "Cliente";
             }
 
-            // 3. Guardar na Base de Dados
+            // 4. Guardar na Base de Dados
             _context.Utilizadores.Add(utilizador);
             await _context.SaveChangesAsync();
             
@@ -72,7 +80,8 @@ namespace GestaoDeCinema.Controllers
                 {
                     new Claim(ClaimTypes.Name, user.Nome),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Funcao)
+                    new Claim(ClaimTypes.Role, user.Funcao),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -99,7 +108,10 @@ namespace GestaoDeCinema.Controllers
         [Microsoft.AspNetCore.Authorization.Authorize]
         public async Task<IActionResult> Perfil()
         {
-            var userEmail = User.Identity.Name;
+            var userEmail = User.GetUserEmail();
+            if (string.IsNullOrEmpty(userEmail))
+                return RedirectToAction("Login");
+
             var utilizador = await _context.Utilizadores
                 .FirstOrDefaultAsync(u => u.Email == userEmail);
 
@@ -115,7 +127,10 @@ namespace GestaoDeCinema.Controllers
         [Microsoft.AspNetCore.Authorization.Authorize]
         public async Task<IActionResult> Perfil(string nome, string email, string? password)
         {
-            var userEmail = User.Identity.Name;
+            var userEmail = User.GetUserEmail();
+            if (string.IsNullOrEmpty(userEmail))
+                return RedirectToAction("Login");
+
             var utilizador = await _context.Utilizadores
                 .FirstOrDefaultAsync(u => u.Email == userEmail);
 
@@ -144,6 +159,13 @@ namespace GestaoDeCinema.Controllers
             // Atualizar Password (se fornecida)
             if (!string.IsNullOrWhiteSpace(password))
             {
+                // Validar password forte
+                if (password.Length < 6)
+                {
+                    TempData["Erro"] = "A password deve ter pelo menos 6 caracteres.";
+                    return View(utilizador);
+                }
+                
                 utilizador.Password = password;
             }
 

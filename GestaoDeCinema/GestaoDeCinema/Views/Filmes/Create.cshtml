@@ -1,55 +1,219 @@
-ï»¿@model GestaoDeCinema.Models.Filme
+@model GestaoDeCinema.Models.ViewModels.FilmeCreateViewModel
 
 @{
     ViewData["Title"] = "Adicionar Filme";
+    Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
     <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>@ViewData["Title"]</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css?v=2" />
+
     <style>
-        body { background-color: #181113; color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .form-container { max-width: 700px; margin: 40px auto; padding: 30px; background-color: #1e1e1e; border-radius: 12px; border: 1px solid #333; }
-        .form-label { font-weight: 600; color: #a0a0a0; margin-bottom: 8px; }
-        .form-control, .form-select { background-color: #2a2a2a; border: 1px solid #333; color: white; border-radius: 8px; }
-        .form-control:focus, .form-select:focus { background-color: #2a2a2a; border-color: #ec135b; color: white; box-shadow: 0 0 0 0.25rem rgba(236, 19, 91, 0.25); }
-        .btn-primary-custom { background-color: #ec135b; color: white; font-weight: 600; border: none; border-radius: 8px; padding: 10px 24px; }
-        .btn-primary-custom:hover { background-color: #c90f4d; }
-        .btn-secondary-custom { background-color: transparent; border: 1px solid #333; color: #a0a0a0; border-radius: 8px; padding: 10px 24px; }
-        .btn-secondary-custom:hover { background-color: #2a2a2a; color: white; }
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-bottom: 4px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(236, 19, 91, 0.1);
+            color: var(--primary-color);
+        }
+
+        .nav-link .material-symbols-outlined {
+            font-size: 22px;
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            margin-left: 260px;
+            padding: 24px;
+        }
+
+        .form-container { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            padding: 30px; 
+            background-color: #1e1e1e; 
+            border-radius: 12px; 
+            border: 1px solid #333; 
+        }
+        
+        .form-label { 
+            font-weight: 600; 
+            color: white; 
+            margin-bottom: 8px; 
+        }
+        
+        .form-control, .form-select { 
+            background-color: #2a2a2a; 
+            border: 1px solid #333; 
+            color: white; 
+            border-radius: 8px; 
+        }
+        
+        .form-control:focus, .form-select:focus { 
+            background-color: #2a2a2a; 
+            border-color: #ec135b; 
+            color: white; 
+            box-shadow: 0 0 0 0.25rem rgba(236, 19, 91, 0.25); 
+        }
+        
+        .btn-primary-custom { 
+            background-color: #ec135b; 
+            color: white; 
+            font-weight: 600; 
+            border: none; 
+            border-radius: 8px; 
+            padding: 10px 24px; 
+        }
+        
+        .btn-primary-custom:hover { 
+            background-color: #c90f4d; 
+        }
+        
+        .btn-secondary-custom { 
+            background-color: transparent; 
+            border: 1px solid #333; 
+            color: #a0a0a0; 
+            border-radius: 8px; 
+            padding: 10px 24px; 
+            text-decoration: none;
+        }
+        
+        .btn-secondary-custom:hover { 
+            background-color: #2a2a2a; 
+            color: white; 
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <aside class="sidebar d-flex flex-column">
+        <div class="d-flex align-items-center gap-3 px-4 py-4 mb-2">
+            <img src="~/imagens/logo_cinema.jpg" style="height: 40px; border-radius: 6px;" alt="Logo">
+            <h1 class="h5 fw-bold mb-0 text-white">Admin Cinema</h1>
+        </div>
+
+        <nav class="flex-grow-1 px-3">
+            <a asp-controller="Admin" asp-action="Index" class="nav-link">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+            <a asp-controller="Filmes" asp-action="Index" class="nav-link active">
+                <span class="material-symbols-outlined">theaters</span>
+                Filmes
+            </a>
+            <a asp-controller="Sessoes" asp-action="Index" class="nav-link">
+                <span class="material-symbols-outlined">movie_filter</span>
+                Sessões
+            </a>
+            <a asp-controller="Admin" asp-action="VerReservas" class="nav-link">
+                <span class="material-symbols-outlined">confirmation_number</span>
+                Reservas
+            </a>
+            <a asp-controller="Utilizadores" asp-action="Index" class="nav-link">
+                <span class="material-symbols-outlined">group</span>
+                Utilizadores
+            </a>
+        </nav>
+
+        <div class="px-3 pb-4 mt-auto">
+            <a asp-controller="Account" asp-action="Perfil" class="nav-link">
+                <span class="material-symbols-outlined">settings</span>
+                Definições
+            </a>
+            <form asp-controller="Account" asp-action="Logout" method="post" class="w-100">
+                <button type="submit" class="nav-link w-100 border-0 bg-transparent text-danger">
+                    <span class="material-symbols-outlined">logout</span>
+                    Sair
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <div class="main-content">
         <div class="form-container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="h3 fw-bold">@ViewData["Title"]</h2>
-                <a asp-action="Index" class="btn-secondary-custom">Cancelar</a>
+
             </div>
 
             <form asp-action="Create" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
+                @if (ViewBag.Errors != null)
+                {
+                    <div class="alert alert-warning">
+                        <h5>Erros de Validação (DEBUG):</h5>
+                        <ul>
+                            @foreach (var erro in ViewBag.Errors)
+                            {
+                                <li>@erro</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
                 <div class="mb-3">
-                    <label asp-for="Titulo" class="form-label">TÃ­tulo do Filme</label>
+                    <label asp-for="Titulo" class="form-label">Título do Filme</label>
                     <input asp-for="Titulo" class="form-control" placeholder="Ex: O Padrinho" required />
                     <span asp-validation-for="Titulo" class="text-danger"></span>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label asp-for="Genero" class="form-label">GÃ©nero</label>
-                        <input asp-for="Genero" class="form-control" placeholder="Ex: Drama, AÃ§Ã£o" />
+                        <label asp-for="Genero" class="form-label">Género</label>
+                        <input asp-for="Genero" class="form-control" placeholder="Ex: Drama, Ação" />
                         <span asp-validation-for="Genero" class="text-danger"></span>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label asp-for="Duracao" class="form-label">DuraÃ§Ã£o (minutos)</label>
+                        <label asp-for="Duracao" class="form-label">Duração (minutos)</label>
                         <input asp-for="Duracao" type="number" class="form-control" placeholder="Ex: 120" />
                         <span asp-validation-for="Duracao" class="text-danger"></span>
                     </div>
@@ -57,14 +221,15 @@
 
                 <div class="mb-3">
                     <label asp-for="Sinopse" class="form-label">Sinopse</label>
-                    <textarea asp-for="Sinopse" class="form-control" rows="4" placeholder="Breve descriÃ§Ã£o do filme..."></textarea>
+                    <textarea asp-for="Sinopse" class="form-control" rows="4" placeholder="Breve descrição do filme..."></textarea>
                     <span asp-validation-for="Sinopse" class="text-danger"></span>
                 </div>
 
                 <div class="mb-4">
-                    <label for="ficheiroImagem" class="form-label">Imagem de Capa</label>
-                    <input type="file" name="ficheiroImagem" id="ficheiroImagem" class="form-control" accept="image/*" />
-                    <div class="form-text text-muted small">Formatos aceites: JPG, PNG, GIF. Tamanho mÃ¡ximo: 5MB</div>
+                    <label asp-for="FicheiroImagem" class="form-label">Imagem de Capa</label>
+                    <input asp-for="FicheiroImagem" type="file" class="form-control" accept="image/*" />
+
+                    <span asp-validation-for="FicheiroImagem" class="text-danger"></span>
                 </div>
 
                 <hr class="my-4" style="border-color: #333;">
@@ -78,8 +243,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation/1.17.0/additional-methods.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

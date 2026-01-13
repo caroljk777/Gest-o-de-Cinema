@@ -1,4 +1,4 @@
-ï»¿@model GestaoDeCinema.Models.Utilizador
+@model GestaoDeCinema.Models.Utilizador
 
 @{
     Layout = null;
@@ -32,11 +32,9 @@
         <div class="col-12 col-md-8 col-lg-5 col-xl-4">
             
             <div class="text-center mb-5">
-                <svg fill="none" height="64" viewBox="0 0 24 24" width="64" xmlns="http://www.w3.org/2000/svg" class="mb-3 d-inline-block">
-                    <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM8 11H6.5V10H8V11ZM8 9H6.5V8H8V9ZM8 7H6.5V6H8V7ZM15.5 17L14.5 13H9.5L8.5 17H6.75L9.63 6H14.38L17.25 17H15.5ZM17.5 11H16V10H17.5V11ZM17.5 9H16V8H17.5V9ZM17.5 7H16V6H17.5V7ZM10.25 11.5H13.75L12 7.5L10.25 11.5Z" fill="#ec135b"></path>
-                </svg>
+                <img src="~/imagens/logo_cinema.jpg" height="64" width="64" alt="Cinema Logo" class="mb-3 d-inline-block" style="border-radius: 8px;">
                 <h1 class="fw-black mb-1 display-5 fw-bold">Criar Conta</h1>
-                <p class="text-custom-muted">Junte-se Ã  nossa comunidade de cinema</p>
+                <p class="text-custom-muted">Junte-se à nossa comunidade de cinema</p>
             </div>
 
             <form asp-action="Register" method="post" class="w-100">
@@ -45,7 +43,7 @@
                     <label asp-for="Nome" class="form-label fw-medium mb-2">Nome Completo</label>
                     <div class="position-relative">
                         <span class="material-symbols-outlined input-group-icon">badge</span>
-                        <input asp-for="Nome" class="form-control form-control-custom" placeholder="Ex: JoÃ£o Silva" required />
+                        <input asp-for="Nome" class="form-control form-control-custom" placeholder="Ex: João Silva" required />
                     </div>
                     <span asp-validation-for="Nome" class="text-danger small mt-1"></span>
                 </div>
@@ -68,6 +66,15 @@
                     <span asp-validation-for="Password" class="text-danger small mt-1"></span>
                 </div>
 
+                <div class="mb-4">
+                    <label class="form-label fw-medium mb-2">Confirmar Palavra-passe</label>
+                    <div class="position-relative">
+                        <span class="material-symbols-outlined input-group-icon">lock</span>
+                        <input name="ConfirmPassword" type="password" class="form-control form-control-custom" placeholder="Repita a palavra-passe" required />
+                    </div>
+                    <span id="confirmPasswordError" class="text-danger small mt-1"></span>
+                </div>
+
                 <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary-custom">
                         Criar Conta
@@ -76,7 +83,7 @@
 
                 <div class="text-center mt-4">
                     <p class="text-custom-muted small">
-                        JÃ¡ tem conta? 
+                        Já tem conta? 
                         <a asp-action="Login" class="link-custom fw-bold">Entrar</a>
                     </p>
                 </div>

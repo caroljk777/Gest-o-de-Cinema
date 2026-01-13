@@ -29,5 +29,17 @@ namespace GestaoDeCinema.Controllers
             
             return View(viewModel);
         }
+
+        public async Task<IActionResult> VerReservas()
+        {
+            var reservas = await _context.Reservas
+                .Include(r => r.Sessao)
+                    .ThenInclude(s => s!.Filme)
+                .Include(r => r.Utilizador)
+                .OrderByDescending(r => r.DataReserva)
+                .ToListAsync();
+
+            return View(reservas);
+        }
     }
 }

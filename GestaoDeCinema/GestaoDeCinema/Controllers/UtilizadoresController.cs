@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using GestaoDeCinema.BD;
 using GestaoDeCinema.Models;
 using Microsoft.EntityFrameworkCore;
+using GestaoDeCinema.Extensions;
 
 namespace GestaoDeCinema.Controllers
 {
@@ -139,7 +140,8 @@ namespace GestaoDeCinema.Controllers
             }
 
             // Não permitir eliminar o próprio utilizador logado
-            if (utilizador.Email == User.Identity.Name)
+            var userEmail = User.GetUserEmail();
+            if (utilizador.Email == userEmail)
             {
                 TempData["Erro"] = "Não pode eliminar a sua própria conta.";
                 return RedirectToAction(nameof(Index));
@@ -165,7 +167,8 @@ namespace GestaoDeCinema.Controllers
                 }
 
                 // Verificação adicional de segurança
-                if (utilizador.Email == User.Identity.Name)
+                var userEmail = User.GetUserEmail();
+                if (utilizador.Email == userEmail)
                 {
                     TempData["Erro"] = "Não pode eliminar a sua própria conta.";
                     return RedirectToAction(nameof(Index));

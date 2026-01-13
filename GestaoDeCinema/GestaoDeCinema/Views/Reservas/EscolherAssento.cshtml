@@ -80,6 +80,7 @@
             justify-content: center;
             font-size: 0.75rem;
             font-weight: 600;
+            color: white;
         }
 
         .seat:hover:not(.reserved):not(.selected) {
@@ -98,6 +99,7 @@
             border-color: #666;
             cursor: not-allowed;
             opacity: 0.5;
+            color: #888;
         }
 
         .legend {
@@ -151,14 +153,14 @@
     <div class="main-content">
         
         <div class="info-card">
-            <h5 class="fw-bold mb-2">@Model.Filme.Titulo</h5>
+            <h5 class="fw-bold mb-2 text-white">@(Model.Filme?.Titulo ?? "Filme")</h5>
             <p class="text-muted small mb-0">
                 <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">schedule</span>
                 @Model.Hora.ToString("dddd, dd 'de' MMMM 'às' HH:mm", new System.Globalization.CultureInfo("pt-PT"))
             </p>
         </div>
 
-        <h5 class="fw-bold mb-3 text-center">Escolha seu Assento</h5>
+        <h5 class="fw-bold mb-3 text-center text-white">Escolha seu Assento</h5>
 
         <div class="text-center mb-3">
             <small class="text-muted">TELA</small>
@@ -180,11 +182,18 @@
                         var seatId = $"{row}{i}";
                         var isReserved = assentosReservados.Contains(seatId);
                         
-                        <div class="seat @(isReserved ? "reserved" : "")" 
-                             data-seat="@seatId"
-                             @(isReserved ? "" : "onclick=\"selectSeat(this)\"")>
-                            @i
-                        </div>
+                        if (isReserved)
+                        {
+                            <div class="seat reserved" data-seat="@seatId">
+                                @i
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="seat" data-seat="@seatId" onclick="selectSeat(this)">
+                                @i
+                            </div>
+                        }
                     }
                     <div class="row-label">@row</div>
                 </div>
@@ -208,16 +217,35 @@
 
         <form asp-action="Confirmar" method="post" id="reservaForm">
             <input type="hidden" name="sessaoId" value="@Model.Id" />
-            <input type="hidden" name="assento" id="assentoInput" />
+            <input type="hidden" name="numeroLugares" value="1" id="numeroLugaresInput" />
+            <input type="hidden" name="assentosEscolhidos" id="assentosInput" />
             
-            <button type="submit" class="btn-confirmar" id="btnConfirmar" disabled>
-                Confirmar Reserva - @Model.Preco.ToString("C")
+            <div class="filme-header mt-4">
+                <h6 class="fw-bold mb-3 text-white">Dados de Pagamento</h6>
+                <div class="mb-3">
+                    <label for="numeroCartao" class="form-label small text-white">Número do Cartão (16 dígitos)</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="numeroCartao" 
+                           name="numeroCartao" 
+                           placeholder="1234 5678 9012 3456"
+                           maxlength="19"
+                           pattern="[0-9 ]{19}"
+                           required
+                           onkeyup="formatCardNumber(this)"
+                           style="background-color: var(--bg-dark) !important; border: 1px solid var(--border-color) !important; color: white !important;">
+                    <small class="text-white-60">Utilize o formato: 0000 0000 0000 0000</small>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-comprar w-100 justify-content-center mt-3" id="btnConfirmar" disabled>
+                Selecione um Assento
             </button>
         </form>
 
         <div class="mt-4 text-center">
-            <a href="@Url.Action("EscolherSessao", new { id = Model.FilmeId })" class="text-muted text-decoration-none">
-                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">arrow_back</span>
+            <a href="@Url.Action("EscolherSessao", new { id = Model.FilmeId })" class="btn-outline-custom text-decoration-none d-inline-flex align-items-center gap-2">
+                <span class="material-symbols-outlined">arrow_back</span>
                 Voltar aos Horários
             </a>
         </div>
@@ -226,6 +254,14 @@
 
     <script>
         let selectedSeat = null;
+        const precoUnitario = @Model.Preco;
+
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\s/g, '');
+            let formatted = value.match(/.{1,4}/g)?.join(' ') || value;
+            input.value = formatted;
+            validateForm();
+        }
 
         function selectSeat(element) {
             if (element.classList.contains('reserved')) return;
@@ -241,9 +277,27 @@
 
             // Atualizar form
             const seatId = element.getAttribute('data-seat');
-            document.getElementById('assentoInput').value = seatId;
-            document.getElementById('btnConfirmar').disabled = false;
-            document.getElementById('btnConfirmar').textContent = `Confirmar Assento ${seatId} - @Model.Preco.ToString("C")`;
+            document.getElementById('assentosInput').value = seatId;
+            
+            validateForm();
+        }
+
+        function validateForm() {
+            const cartao = document.getElementById('numeroCartao').value.replace(/\s/g, '');
+            const assento = document.getElementById('assentosInput').value;
+            const btnConfirmar = document.getElementById('btnConfirmar');
+            
+            if (assento && cartao.length === 16) {
+                btnConfirmar.disabled = false;
+                btnConfirmar.textContent = `Confirmar Assento ${assento} - ${precoUnitario.toLocaleString('pt-PT', {style: 'currency', currency: 'EUR'})}`;
+            } else {
+                btnConfirmar.disabled = true;
+                if (!assento) {
+                    btnConfirmar.textContent = 'Selecione um Assento';
+                } else {
+                    btnConfirmar.textContent = 'Preencha o Número do Cartão';
+                }
+            }
         }
     </script>
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"] - Gestão de Cinema</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css" asp-append-version="true" />
+
+    <style>
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-primary-custom {
+            color: var(--primary-color) !important;
+        }
+
+        /* Estilos para página de Escolher Sessão */
+        .sessao-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .sessao-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(236, 19, 91, 0.2);
+        }
+
+        .filme-header {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .btn-comprar {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-comprar:hover {
+            background-color: #c90f4d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 19, 91, 0.4);
+        }
+
+        .price-badge h4 {
+            color: #4caf50 !important;
+        }
+
+        .disponibilidade {
+            color: #4ade80;
+            font-size: 14px;
+        }
+
+        /* Estilos para cards de reserva */
+        .card-reserva {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: transform 0.2s;
+        }
+
+        .card-reserva:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-color);
+        }
+
+        .badge-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-confirmada {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .status-cancelada {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+
+        .btn-nova-reserva {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #c90f4d 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-nova-reserva:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Estilos de filmes */
+        .filme-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .filme-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 24px rgba(236, 19, 91, 0.3);
+        }
+
+        .filme-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .filme-info {
+            padding: 16px;
+        }
+
+        @RenderSection("Styles", required: false)
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,4 +1,4 @@
-ï»¿@model IEnumerable<GestaoDeCinema.Models.Filme>
+@model IEnumerable<GestaoDeCinema.Models.Filme>
 
 @{
     Layout = null;
@@ -121,19 +121,48 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="d-flex align-items-center gap-2">
-                        <span class="material-symbols-outlined text-primary-custom" style="font-size: 32px;">movie</span>
+                        <img src="~/imagens/logo_cinema.jpg" alt="Cinema Logo" style="height: 32px; width: 32px; border-radius: 6px;">
                         <h1 class="h4 fw-bold mb-0">Cinema</h1>
                     </div>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a asp-controller="Account" asp-action="Login" class="btn-auth btn-login me-2">
-                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">login</span>
-                        Entrar
-                    </a>
-                    <a asp-controller="Account" asp-action="Register" class="btn-auth btn-register">
-                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">person_add</span>
-                        Criar Conta
-                    </a>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <!-- Utilizador Autenticado -->
+                        <span class="text-white me-3">Olá, <strong>@User.Identity.Name</strong>!</span>
+                        
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-controller="Admin" asp-action="Index" class="btn-auth btn-login me-2">
+                                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">dashboard</span>
+                                Dashboard
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Reservas" asp-action="Index" class="btn-auth btn-login me-2">
+                                <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">confirmation_number</span>
+                                Minhas Reservas
+                            </a>
+                        }
+                        
+                        <a asp-controller="Account" asp-action="Logout" class="btn-auth btn-register">
+                            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">logout</span>
+                            Sair
+                        </a>
+                    }
+                    else
+                    {
+                        <!-- Utilizador NÃO Autenticado -->
+                        <a asp-controller="Account" asp-action="Login" class="btn-auth btn-login me-2">
+                            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">login</span>
+                            Entrar
+                        </a>
+                        <a asp-controller="Account" asp-action="Register" class="btn-auth btn-register">
+                            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">person_add</span>
+                            Criar Conta
+                        </a>
+                    }
                 </div>
             </div>
         </div>
@@ -142,8 +171,8 @@
     <!-- Hero Section -->
     <div class="hero">
         <div class="container">
-            <h2 class="display-4 fw-bold mb-3">ðŸŽ¬ Filmes em Cartaz</h2>
-            <p class="lead text-muted">Descubra os melhores filmes disponÃ­veis no nosso cinema</p>
+            <h2 class="display-4 fw-bold mb-3">Filmes em Cartaz</h2>
+            <p class="lead text-muted">Descubra os melhores filmes disponíveis no nosso cinema</p>
         </div>
     </div>
 
@@ -155,34 +184,36 @@
                 @foreach (var filme in Model)
                 {
                     <div class="col-md-4 col-lg-3">
-                        <div class="filme-card">
-                            @if (!string.IsNullOrEmpty(filme.CapaImagem))
-                            {
-                                <img src="/imagens/@filme.CapaImagem" alt="@filme.Titulo" class="filme-poster" />
-                            }
-                            else
-                            {
-                                <div class="filme-poster d-flex align-items-center justify-content-center">
-                                    <span class="material-symbols-outlined" style="font-size: 80px; opacity: 0.3;">theaters</span>
-                                </div>
-                            }
-                            <div class="filme-info">
-                                <h5 class="fw-bold mb-2">@filme.Titulo</h5>
-                                <div class="mb-2">
-                                    <span class="badge-genero">@filme.Genero</span>
-                                </div>
-                                <div class="d-flex align-items-center gap-2 text-muted small">
-                                    <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
-                                    @filme.Duracao min
-                                </div>
-                                @if (!string.IsNullOrEmpty(filme.Sinopse))
+                        <a href="@Url.Action("EscolherSessao", "Reservas", new { id = filme.Id })" class="text-decoration-none" style="cursor: pointer;">
+                            <div class="filme-card">
+                                @if (!string.IsNullOrEmpty(filme.CapaImagem))
                                 {
-                                    <p class="text-muted small mt-2 mb-0" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                                        @filme.Sinopse
-                                    </p>
+                                    <img src="/imagens/@filme.CapaImagem" alt="@filme.Titulo" class="filme-poster" />
                                 }
+                                else
+                                {
+                                    <div class="filme-poster d-flex align-items-center justify-content-center">
+                                        <span class="material-symbols-outlined" style="font-size: 80px; opacity: 0.3;">theaters</span>
+                                    </div>
+                                }
+                                <div class="filme-info">
+                                    <h5 class="fw-bold mb-2">@filme.Titulo</h5>
+                                    <div class="mb-2">
+                                        <span class="badge-genero">@filme.Genero</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 text-muted small">
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+                                        @filme.Duracao min
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(filme.Sinopse))
+                                    {
+                                        <p class="text-muted small mt-2 mb-0" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                            @filme.Sinopse
+                                        </p>
+                                    }
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 }
             </div>
@@ -191,7 +222,7 @@
         {
             <div class="text-center py-5">
                 <span class="material-symbols-outlined" style="font-size: 80px; color: var(--text-muted);">movie</span>
-                <h4 class="text-muted mt-3">Nenhum filme disponÃ­vel no momento</h4>
+                <h4 class="text-muted mt-3">Nenhum filme disponível no momento</h4>
                 <p class="text-muted">Em breve teremos novidades!</p>
             </div>
         }
@@ -199,7 +230,7 @@
 
     <!-- Footer -->
     <div class="text-center py-4 mt-5" style="border-top: 1px solid var(--border-color);">
-        <p class="text-muted mb-0">Â© 2026 Cinema - GestÃ£o de Cinema</p>
+        <p class="text-muted mb-0">© 2026 Cinema - Gestão de Cinema</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

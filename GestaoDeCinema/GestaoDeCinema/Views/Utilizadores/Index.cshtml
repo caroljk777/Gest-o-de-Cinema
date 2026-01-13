@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GestaoDeCinema.Models.Utilizador>
+@model IEnumerable<GestaoDeCinema.Models.Utilizador>
 
 @{
     Layout = null;
@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css?v=2" />
 
     <style>
         :root {
@@ -128,13 +128,26 @@
         }
         .btn-icon:hover { background-color: rgba(255,255,255,0.1); color: white; }
         .btn-icon.delete:hover { background-color: rgba(220, 53, 69, 0.2); color: #dc3545; }
+        
+        /* Forçar fundo escuro em TODAS as tabelas - override Bootstrap */
+        .table, .table > tbody > tr, .table > thead > tr, .table > tfoot > tr {
+            background-color: var(--bg-card) !important;
+        }
+        .table > tbody > tr > td, .table > thead > tr > th, .table > tfoot > tr > td {
+            background-color: transparent !important;
+            color: white !important;
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) > * {
+            --bs-table-bg-type: var(--bg-card) !important;
+            background-color: var(--bg-card) !important;
+        }
     </style>
 </head>
 <body>
 
     <aside class="sidebar d-flex flex-column">
         <div class="d-flex align-items-center gap-3 px-4 py-4 mb-2">
-            <img src="~/imagens/iconn.png" style="height: 40px; border-radius: 6px;" alt="Logo">
+            <img src="~/imagens/logo_cinema.jpg" style="height: 40px; border-radius: 6px;" alt="Logo">
             <h1 class="h5 fw-bold mb-0 text-white">Admin Cinema</h1>
         </div>
 
@@ -151,7 +164,7 @@
                 <span class="material-symbols-outlined">movie_filter</span>
                 Sessões
             </a>
-            <a asp-controller="Reservas" asp-action="Index" class="nav-link">
+            <a asp-controller="Admin" asp-action="VerReservas" class="nav-link">
                 <span class="material-symbols-outlined">confirmation_number</span>
                 Reservas
             </a>
@@ -178,13 +191,10 @@
     <div class="main-content">
         
         <header class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="h5 fw-bold mb-0">Painel de Administração</h2>
+            <h2 class="h5 fw-bold mb-0">Painel de Administraãão</h2>
             
             <div class="d-flex align-items-center gap-4">
-                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white fw-bold" 
-                     style="width: 40px; height: 40px;">
-                    @User.Identity.Name?.Substring(0,1).ToUpper()
-                </div>
+
             </div>
         </header>
 
@@ -200,24 +210,10 @@
             <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
                 <div>
                     <h2 class="h3 fw-bold text-white mb-1">Utilizadores</h2>
-                    <p class="text-muted small mb-0">Gira a lista de utilizadores registados no sistema.</p>
+
                 </div>
             </div>
 
-            <div class="filter-bar d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
-                <div class="position-relative flex-grow-1" style="min-width: 250px;">
-                    <span class="material-symbols-outlined position-absolute text-muted" style="left: 12px; top: 10px; font-size: 20px;">search</span>
-                    <input type="text" class="form-control form-control-dark ps-5" placeholder="Procurar por nome ou email...">
-                </div>
-
-                <div class="d-flex gap-3">
-                    <select class="form-select form-select-dark" style="width: 160px;">
-                        <option>Todos os Papéis</option>
-                        <option>Admin</option>
-                        <option>Utilizador</option>
-                    </select>
-                </div>
-            </div>
 
             <div class="table-custom">
                 <table class="table table-borderless align-middle">
@@ -235,10 +231,7 @@
                             <tr>
                                 <td class="ps-4">
                                     <div class="d-flex align-items-center gap-3">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold" 
-                                             style="width: 32px; height: 32px; background-color: var(--primary-color); color: white;">
-                                            @user.Nome.Substring(0,1).ToUpper()
-                                        </div>
+
                                         <span class="fw-medium text-white">@user.Nome</span>
                                     </div>
                                 </td>
@@ -246,27 +239,22 @@
                                 <td>
                                     @if(user.Funcao == "Administrador")
                                     {
-                                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Admin</span>
+                                        <span style="color: #4caf50; font-weight: 600;">Admin</span>
                                     }
                                     else
                                     {
-                                        <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3">Cliente</span>
+                                        <span style="color: #ec135b; font-weight: 600;">Cliente</span>
                                     }
                                 </td>
                                 <td class="pe-4">
                                     @if (user.Email.ToLower() == "admin@cinema.com")
                                     {
-                                        <span class="badge bg-secondary">🔒 Protegido</span>
+                                        <span style="color: #a0a0a0; font-weight: 600;">Protegido</span>
                                     }
                                     else
                                     {
                                         <div class="d-flex gap-1">
-                                            <a asp-action="Details" asp-route-id="@user.Id" class="btn-icon" title="Ver">
-                                                <span class="material-symbols-outlined fs-5">visibility</span>
-                                            </a>
-                                            <a asp-action="Edit" asp-route-id="@user.Id" class="btn-icon" title="Editar">
-                                                <span class="material-symbols-outlined fs-5">edit</span>
-                                            </a>
+
                                             <a asp-action="Delete" asp-route-id="@user.Id" class="btn-icon delete" title="Apagar">
                                                 <span class="material-symbols-outlined fs-5">delete</span>
                                             </a>

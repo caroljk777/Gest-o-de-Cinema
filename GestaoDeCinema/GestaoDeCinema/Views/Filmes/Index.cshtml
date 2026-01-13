@@ -1,55 +1,190 @@
-﻿@model IEnumerable<GestaoDeCinema.Models.Filme>
+@model IEnumerable<GestaoDeCinema.Models.Filme>
 
 @{
-    ViewData["Title"] = "Gestão de Filmes";
+    Layout = null;
+    ViewData["Title"] = "Filmes - Admin";
 }
 
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
     <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>@ViewData["Title"]</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+    <link rel="stylesheet" href="~/css/cinemaTheme.css?v=2" />
+
     <style>
-        body { background-color: #181113; color: white; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .container { max-width: 1200px; margin: 40px auto; }
-        .card-filme { background-color: #1e1e1e; border: 1px solid #333; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .btn-primary-custom { background-color: #ec135b; color: white; font-weight: 600; border: none; border-radius: 8px; padding: 10px 24px; }
-        .btn-primary-custom:hover { background-color: #c90f4d; }
-        .btn-icon { width: 32px; height: 32px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; border: none; background: transparent; color: #a0a0a0; }
-        .btn-icon:hover { background-color: rgba(255,255,255,0.1); color: white; }
-        .btn-icon.delete:hover { background-color: rgba(220, 53, 69, 0.2); color: #dc3545; }
-        .movie-poster-small { width: 100px; height: 150px; object-fit: cover; border-radius: 8px; }
+        :root {
+            --primary-color: #ec135b;
+            --bg-dark: #181113;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(236, 19, 91, 0.1);
+            color: var(--primary-color);
+        }
+
+        .nav-link .material-symbols-outlined {
+            font-size: 22px;
+        }
+
+        /* Conteãdo Principal */
+        .main-content {
+            margin-left: 260px;
+            padding: 24px;
+        }
+
+        .text-primary-custom { color: var(--primary-color) !important; }
+
+        .card-filme {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: transform 0.2s;
+        }
+
+        .card-filme:hover {
+            transform: translateY(-2px);
+        }
+
+        .movie-poster-small {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .btn-icon:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-icon.delete:hover {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <aside class="sidebar d-flex flex-column">
+        <div class="d-flex align-items-center gap-3 px-4 py-4 mb-2">
+            <img src="~/imagens/logo_cinema.jpg" style="height: 40px; border-radius: 6px;" alt="Logo">
+            <h1 class="h5 fw-bold mb-0 text-white">Admin Cinema</h1>
+        </div>
+
+        <nav class="flex-grow-1 px-3">
+            <a asp-controller="Admin" asp-action="Index" class="nav-link mb-1">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+            <a asp-controller="Filmes" asp-action="Index" class="nav-link active mb-1">
+                <span class="material-symbols-outlined">theaters</span>
+                Filmes
+            </a>
+            <a asp-controller="Sessoes" asp-action="Index" class="nav-link mb-1">
+                <span class="material-symbols-outlined">movie_filter</span>
+                Sessões
+            </a>
+            <a asp-controller="Admin" asp-action="VerReservas" class="nav-link mb-1">
+                <span class="material-symbols-outlined">confirmation_number</span>
+                Reservas
+            </a>
+            <a asp-controller="Utilizadores" asp-action="Index" class="nav-link mb-1">
+                <span class="material-symbols-outlined">group</span>
+                Utilizadores
+            </a>
+        </nav>
+
+        <div class="px-3 pb-4 mt-auto">
+            <a asp-controller="Account" asp-action="Perfil" class="nav-link mb-1">
+                <span class="material-symbols-outlined">settings</span>
+                Definições
+            </a>
+            <form asp-controller="Account" asp-action="Logout" method="post" class="w-100">
+                <button type="submit" class="nav-link w-100 border-0 bg-transparent text-danger">
+                    <span class="material-symbols-outlined">logout</span>
+                    Sair
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
-                <h1 class="h3 fw-bold mb-2">@ViewData["Title"]</h1>
-                <p class="text-muted mb-0">Gira os filmes disponíveis no cinema</p>
+                <h2 class="h5 fw-bold mb-1">Gestão de Filmes</h2>
+
             </div>
-            <div class="d-flex gap-3">
-                <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-secondary">
-                    Voltar ao Dashboard
-                </a>
-                <a asp-action="Create" class="btn-primary-custom d-flex align-items-center gap-2">
-                    <span class="material-symbols-outlined">add</span>
-                    Adicionar Filme
-                </a>
-            </div>
+            <a asp-action="Create" class="btn btn-primary fw-bold d-flex align-items-center gap-2 rounded-3 bg-primary-custom border-0" style="padding: 10px 20px;">
+                <span class="material-symbols-outlined fs-5">add</span>
+                Adicionar Filme
+            </a>
         </div>
 
         @if (!Model.Any())
         {
-            <div class="card-filme text-center py-5">
-                <span class="material-symbols-outlined fs-1 text-muted mb-3">movie</span>
-                <h3 class="h5 text-muted">Nenhum filme cadastrado</h3>
-                <p class="text-muted small mb-3">Comece adicionando o primeiro filme ao sistema</p>
-                <a asp-action="Create" class="btn-primary-custom">Adicionar Primeiro Filme</a>
+            <div class="text-center py-5">
+                <span class="material-symbols-outlined" style="font-size: 64px; color: var(--text-muted);">theaters</span>
+                <h5 class="text-muted mt-3">Nenhum filme cadastrado</h5>
+                <p class="text-muted">Comece adicionando o primeiro filme ao sistema.</p>
+                <a asp-action="Create" class="btn btn-primary fw-bold d-flex align-items-center gap-2 rounded-3 bg-primary-custom border-0 mx-auto" style="padding: 10px 20px; width: fit-content;">
+                    <span class="material-symbols-outlined fs-5">add</span>
+                    Adicionar Primeiro Filme
+                </a>
             </div>
         }
         else
@@ -68,25 +203,20 @@
                                 <img src="@imagemUrl" alt="@filme.Titulo" class="movie-poster-small" />
                                 
                                 <div class="flex-grow-1">
-                                    <h3 class="h5 fw-bold mb-2">@filme.Titulo</h3>
-                                    <p class="text-muted small mb-2 d-flex align-items-center gap-3">
+                                    <h3 class="h5 fw-bold mb-2 text-white">@filme.Titulo</h3>
+                                    <p class="text-white small mb-2 d-flex align-items-center gap-3">
                                         <span>@filme.Genero</span>
-                                        <span>•</span>
+                                        <span>ã</span>
                                         <span>@filme.Duracao min</span>
                                     </p>
                                     @if (!string.IsNullOrEmpty(filme.Sinopse))
                                     {
-                                        <p class="text-muted small mb-3">
+                                        <p class="text-white small mb-3">
                                             @(filme.Sinopse.Length > 100 ? filme.Sinopse.Substring(0, 100) + "..." : filme.Sinopse)
                                         </p>
                                     }
                                     <div class="d-flex gap-2 mt-3">
-                                        <a asp-action="Details" asp-route-id="@filme.Id" class="btn-icon" title="Ver">
-                                            <span class="material-symbols-outlined">visibility</span>
-                                        </a>
-                                        <a asp-action="Edit" asp-route-id="@filme.Id" class="btn-icon" title="Editar">
-                                            <span class="material-symbols-outlined">edit</span>
-                                        </a>
+
                                         <a asp-action="Delete" asp-route-id="@filme.Id" class="btn-icon delete" title="Eliminar">
                                             <span class="material-symbols-outlined">delete</span>
                                         </a>
@@ -98,6 +228,9 @@
                 }
             </div>
         }
+
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

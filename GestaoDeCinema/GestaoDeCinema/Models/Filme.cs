@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema; //serve para usar atributos que controlam como as classes e propriedades
 
 namespace GestaoDeCinema.Models
 {
@@ -9,30 +8,26 @@ namespace GestaoDeCinema.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O título do filme é obrigatório")]
+        [Display(Name = "Título")]
         public string Titulo { get; set; }
 
+        [Required(ErrorMessage = "O género é obrigatório")]
+        [Display(Name = "Género")]
         public string Genero { get; set; }
 
+        [Required(ErrorMessage = "A duração é obrigatória")]
+        [Range(1, 500, ErrorMessage = "A duração deve estar entre 1 e 500 minutos")]
         [Display(Name = "Duração (min)")]
         public int Duracao { get; set; }
 
+        [Required(ErrorMessage = "A sinopse é obrigatória")]
+        [Display(Name = "Sinopse")]
         public string Sinopse { get; set; }
 
-        
-
-        // 1. Caminho da Imagem (O que vai para a Base de Dados)
-        
-        [Display(Name = "Capa Atual")]
+        [Display(Name = "Capa do Filme")]
         public string? CapaImagem { get; set; }
 
-      
-        // O [NotMapped] diz à BD: "Ignora isto, serve só para transportar o ficheiro até à pasta"
-        [NotMapped]
-        [Display(Name = "Carregar Nova Imagem")]
-        public IFormFile? FicheiroImagem { get; set; }
 
-        
-
-        public virtual ICollection<Sessao> Sessoes { get; set; }
+        public virtual ICollection<Sessao> Sessoes { get; set; } = new List<Sessao>();
     }
 }

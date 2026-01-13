@@ -1,23 +1,10 @@
 @model IEnumerable<GestaoDeCinema.Models.Reserva>
 
 @{
-    Layout = null;
+    Layout = "_LayoutReservas";
     ViewData["Title"] = "Minhas Reservas";
 }
-
-<!DOCTYPE html>
-<html lang="pt-pt">
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>@ViewData["Title"]</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
-
-    <style>
+@section Styles {
         :root {
             --primary-color: #ec135b;
             --bg-dark: #181113;
@@ -87,20 +74,14 @@
             color: white;
         }
     </style>
-</head>
-<body>
+}
 
-    <div class="main-content">
-        
-        <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h1 class="h3 fw-bold text-white mb-1">🎬 Minhas Reservas</h1>
-                <p class="text-muted mb-0">Gerencie suas reservas de cinema</p>
+                <h1 class="h3 fw-bold text-white mb-1">Minhas Reservas</h1>
+                <p class="text-white mb-0">Gerencie suas reservas de cinema</p>
             </div>
-            <a asp-controller="Reservas" asp-action="EscolherFilme" class="btn-nova-reserva">
-                <span class="material-symbols-outlined">add</span>
-                Nova Reserva
-            </a>
+
         </div>
 
         @if (TempData["Sucesso"] != null)
@@ -126,36 +107,30 @@
                 <div class="card-reserva">
                     <div class="row align-items-center">
                         <div class="col-md-8">
-                            <h5 class="fw-bold text-white mb-2">@reserva.Sessao.Filme.Titulo</h5>
-                            <div class="d-flex flex-wrap gap-3 text-muted small">
+                            <h5 class="fw-bold text-white mb-2">@(reserva.Sessao?.Filme?.Titulo ?? "Filme")</h5>
+                            <div class="d-flex flex-wrap gap-3 text-white small">
                                 <span>
                                     <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">calendar_today</span>
-                                    @reserva.Sessao.Hora.ToString("dd/MM/yyyy HH:mm")
+                                    @(reserva.Sessao?.Hora.ToString("dd/MM/yyyy HH:mm") ?? "Data N/A")
                                 </span>
                                 <span>
                                     <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">event_seat</span>
-                                    Assento @reserva.Assento
+                                    @(reserva.NumeroLugares) lugar(es)
                                 </span>
                                 <span>
                                     <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">confirmation_number</span>
-                                    @reserva.QuantidadeBilhetes bilhete(s)
+                                    Cartão **** **** **** @reserva.NumeroCartao.Substring(12)
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-4 text-end">
-                            <div class="mb-2">
-                                <span class="badge-status @(reserva.Status == "Confirmada" ? "status-confirmada" : "status-cancelada")">
-                                    @reserva.Status
-                                </span>
-                            </div>
                             <h5 class="text-primary-custom fw-bold mb-2">@reserva.PrecoTotal.ToString("C")</h5>
-                            @if (reserva.Status == "Confirmada")
-                            {
-                                <form asp-action="Cancelar" asp-route-id="@reserva.Id" method="post" style="display:inline;" 
-                                      onsubmit="return confirm('Tem certeza que deseja cancelar esta reserva?');">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar</button>
-                                </form>
-                            }
+                            <form asp-action="Delete" asp-route-id="@reserva.Id" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja cancelar esta reserva?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle;">delete</span>
+                                    Cancelar
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -165,20 +140,14 @@
         {
             <div class="text-center py-5">
                 <span class="material-symbols-outlined" style="font-size: 64px; color: var(--text-muted);">receipt_long</span>
-                <h5 class="text-muted mt-3">Nenhuma reserva encontrada</h5>
-                <p class="text-muted">Faça sua primeira reserva clicando no botão acima!</p>
+                <h5 class="text-white mt-3">Nenhuma reserva encontrada</h5>
+                <p class="text-white">Faça sua primeira reserva clicando no botão acima!</p>
             </div>
         }
 
         <div class="mt-4">
-            <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none">
+            <a asp-controller="Home" asp-action="Index" class="text-white text-decoration-none">
                 <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">arrow_back</span>
-                Voltar ao Início
-            </a>
-        </div>
-
+            Voltar ao Início
+        </a>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

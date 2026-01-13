@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using GestaoDeCinema.BD;
 using GestaoDeCinema.Models;
-using System.IO;
-using Microsoft.AspNetCore.Authorization;
+using GestaoDeCinema.Models.ViewModels;
+using GestaoDeCinema.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoDeCinema.Controllers
 {
@@ -16,10 +12,12 @@ namespace GestaoDeCinema.Controllers
     public class FilmesController : Controller
     {
         private readonly CinemaContext _context;
+        private readonly ILogger<FilmesController> _logger;
 
-        public FilmesController(CinemaContext context)
+        public FilmesController(CinemaContext context, ILogger<FilmesController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Filmes
@@ -46,48 +44,53 @@ namespace GestaoDeCinema.Controllers
             return View();
         }
 
-        // --- AQUI ESTÁ A MUDANÇA PARA O ADMIN CRIAR COM IMAGEM ---
         // POST: Filmes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Filme filme, IFormFile? ficheiroImagem)
+        public async Task<IActionResult> Create(FilmeCreateViewModel viewModel)
         {
-            // 1. Verificar se foi enviada uma imagem
-            if (ficheiroImagem != null && ficheiroImagem.Length > 0)
-            {
-                // Gera nome único (ex: "foto_guid123.jpg")
-                var nomeFicheiro = Guid.NewGuid().ToString() + Path.GetExtension(ficheiroImagem.FileName);
-
-                // Define a pasta wwwroot/imagens
-                var caminhoPasta = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens");
-
-                // Cria a pasta se não existir
-                if (!Directory.Exists(caminhoPasta))
-                {
-                    Directory.CreateDirectory(caminhoPasta);
-                }
-
-                // Grava o ficheiro
-                var caminhoCompleto = Path.Combine(caminhoPasta, nomeFicheiro);
-                using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
-                {
-                    await ficheiroImagem.CopyToAsync(stream);
-                }
-
-                // Guarda APENAS o nome na BD
-                filme.CapaImagem = nomeFicheiro;
-            }
-
-            // Remove a validação do ficheiro (porque não vai para a BD)
-            ModelState.Remove("FicheiroImagem");
-
             if (ModelState.IsValid)
             {
+                var filme = new Filme
+                {
+                    Titulo = viewModel.Titulo,
+                    Genero = viewModel.Genero,
+                    Duracao = viewModel.Duracao,
+                    Sinopse = viewModel.Sinopse
+                };
+
+                // Upload de imagem se fornecida
+                if (viewModel.FicheiroImagem != null)
+                {
+                    if (ImageHelper.ValidateImageFile(viewModel.FicheiroImagem, out string errorMessage))
+                    {
+                        try
+                        {
+                            filme.CapaImagem = await ImageHelper.UploadImageAsync(viewModel.FicheiroImagem);
+                            _logger.LogInformation("Imagem carregada com sucesso: {FileName}", filme.CapaImagem);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, "Erro ao carregar imagem do filme");
+                            ModelState.AddModelError("", "Erro ao carregar a imagem. Por favor, tente novamente.");
+                            return View(viewModel);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("FicheiroImagem", errorMessage);
+                        return View(viewModel);
+                    }
+                }
+
                 _context.Add(filme);
                 await _context.SaveChangesAsync();
+                
+                _logger.LogInformation("Filme criado: {FilmeId} - {Titulo}", filme.Id, filme.Titulo);
                 return RedirectToAction(nameof(Index));
             }
-            return View(filme);
+
+            return View(viewModel);
         }
 
         // GET: Filmes/Edit/5
@@ -97,57 +100,85 @@ namespace GestaoDeCinema.Controllers
 
             var filme = await _context.Filmes.FindAsync(id);
             if (filme == null) return NotFound();
-            return View(filme);
+
+            var viewModel = new FilmeEditViewModel
+            {
+                Id = filme.Id,
+                Titulo = filme.Titulo,
+                Genero = filme.Genero,
+                Duracao = filme.Duracao,
+                Sinopse = filme.Sinopse,
+                CapaImagemAtual = filme.CapaImagem
+            };
+
+            return View(viewModel);
         }
 
-        // --- MUDANÇA PARA EDITAR A IMAGEM ---
         // POST: Filmes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Filme filme, IFormFile? ficheiroImagem)
+        public async Task<IActionResult> Edit(int id, FilmeEditViewModel viewModel)
         {
-            if (id != filme.Id) return NotFound();
-
-            ModelState.Remove("FicheiroImagem");
+            if (id != viewModel.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Se o Admin carregou uma NOVA imagem
-                    if (ficheiroImagem != null && ficheiroImagem.Length > 0)
-                    {
-                        var nomeFicheiro = Guid.NewGuid().ToString() + Path.GetExtension(ficheiroImagem.FileName);
-                        var caminhoPasta = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens");
+                    var filme = await _context.Filmes.FindAsync(id);
+                    if (filme == null) return NotFound();
 
-                        using (var stream = new FileStream(Path.Combine(caminhoPasta, nomeFicheiro), FileMode.Create))
-                        {
-                            await ficheiroImagem.CopyToAsync(stream);
-                        }
-                        filme.CapaImagem = nomeFicheiro;
-                    }
-                    else
+                    // Atualizar campos básicos
+                    filme.Titulo = viewModel.Titulo;
+                    filme.Genero = viewModel.Genero;
+                    filme.Duracao = viewModel.Duracao;
+                    filme.Sinopse = viewModel.Sinopse;
+
+                    // Processar nova imagem se fornecida
+                    if (viewModel.NovaImagem != null)
                     {
-                        // Se NÃO carregou imagem nova, temos de manter a antiga!
-                        // Vamos à BD buscar a imagem que lá estava antes
-                        var filmeAntigo = await _context.Filmes.AsNoTracking().FirstOrDefaultAsync(f => f.Id == id);
-                        if (filmeAntigo != null)
+                        if (ImageHelper.ValidateImageFile(viewModel.NovaImagem, out string errorMessage))
                         {
-                            filme.CapaImagem = filmeAntigo.CapaImagem;
+                            try
+                            {
+                                // Eliminar imagem antiga
+                                ImageHelper.DeleteImage(filme.CapaImagem);
+
+                                // Upload nova imagem
+                                filme.CapaImagem = await ImageHelper.UploadImageAsync(viewModel.NovaImagem);
+                                _logger.LogInformation("Imagem do filme atualizada: {FilmeId}", filme.Id);
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger.LogError(ex, "Erro ao atualizar imagem do filme {FilmeId}", id);
+                                ModelState.AddModelError("", "Erro ao carregar a nova imagem.");
+                                viewModel.CapaImagemAtual = filme.CapaImagem;
+                                return View(viewModel);
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("NovaImagem", errorMessage);
+                            viewModel.CapaImagemAtual = filme.CapaImagem;
+                            return View(viewModel);
                         }
                     }
 
                     _context.Update(filme);
                     await _context.SaveChangesAsync();
+                    
+                    _logger.LogInformation("Filme editado: {FilmeId} - {Titulo}", filme.Id, filme.Titulo);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FilmeExists(filme.Id)) return NotFound();
-                    else throw;
+                    if (!FilmeExists(viewModel.Id))
+                        return NotFound();
+                    else
+                        throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(filme);
+            return View(viewModel);
         }
 
         // GET: Filmes/Delete/5
@@ -168,8 +199,16 @@ namespace GestaoDeCinema.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var filme = await _context.Filmes.FindAsync(id);
-            if (filme != null) _context.Filmes.Remove(filme);
-            await _context.SaveChangesAsync();
+            if (filme != null)
+            {
+                // Eliminar imagem antes de remover o filme
+                ImageHelper.DeleteImage(filme.CapaImagem);
+                
+                _context.Filmes.Remove(filme);
+                await _context.SaveChangesAsync();
+                
+                _logger.LogInformation("Filme eliminado: {FilmeId} - {Titulo}", filme.Id, filme.Titulo);
+            }
             return RedirectToAction(nameof(Index));
         }
 
