@@ -1,0 +1,158 @@
+﻿@model IEnumerable<GestaoDeCinema.Models.Filme>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Cinema - Filmes em Cartaz";
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+    <link rel="stylesheet" href="~/css/cinemaTheme.css" />
+</head>
+<body>
+
+    <div class="d-flex flex-column min-vh-100">
+      
+        <div class="container py-3 flex-grow-1" style="max-width: 960px;">
+            
+            <!-- Header -->
+            <header class="d-flex align-items-center justify-content-between py-3 px-2 mb-4">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="d-flex align-items-center gap-3 text-white text-decoration-none">
+                        <img src="~/imagens/iconn.png" alt="Logo Cinema" 
+                             style="height: 56px; width: auto; border-radius: 6px; object-fit: contain;">
+                        <h2 class="h5 fw-bold mb-0">Cinema</h2>
+                    </div>  
+                </div>
+
+                <div class="d-flex gap-3">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="d-flex align-items-center gap-3 text-white">
+                            <span>Olá, @User.Identity.Name</span>
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                                <button type="submit" class="btn btn-link p-0 text-primary-custom text-decoration-none fw-bold" style="font-size: 0.875rem;">Sair</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-outline-custom d-flex align-items-center justify-content-center text-decoration-none">
+                            <span class="text-truncate">Criar Conta</span>
+                        </a>
+
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-primary-custom d-flex align-items-center justify-content-center text-decoration-none">
+                            <span class="text-truncate">Login</span>
+                        </a>
+                    }
+                </div>
+            </header>
+
+            <main>
+                <section class="px-2 mb-4">
+                    <h2 class="h4 fw-bold mb-2 pt-3">
+                        🍿 Filmes em Cartaz
+                    </h2>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p class="text-white-60 small mb-0">Escolha o seu filme e reserve o seu lugar!</p>
+                    }
+                    else
+                    {
+                        <p class="text-white-60 small mb-0">Veja os filmes disponíveis. Faça login para reservar!</p>
+                    }
+                </section>
+
+                <section class="d-flex flex-column gap-3">
+                    @foreach (var item in Model)
+                    {
+                        <div class="movie-card p-4">
+                            <div class="row g-4">
+                                
+                                @{
+                                    var imagemUrl = !string.IsNullOrEmpty(item.CapaImagem) ? $"/imagens/{item.CapaImagem}" : "https://via.placeholder.com/300x450?text=Sem+Capa";
+                                }
+                                <div class="col-12 col-md-auto">
+                                    <div class="movie-poster" style="background-image: url('@imagemUrl');"></div>
+                                </div>
+
+                                <div class="col-12 col-md d-flex flex-column gap-3">
+                                    
+                                    <div>
+                                        <p class="text-white-60 small mb-1">
+                                            @item.Genero | @item.Duracao min
+                                        </p>
+                                        <h3 class="h4 fw-bold mb-2">@item.Titulo</h3>
+                                        <p class="text-white-60 small mb-0">
+                                            @(!string.IsNullOrEmpty(item.Sinopse) ? item.Sinopse : "Uma experiência cinematográfica imperdível.")
+                                        </p>
+                                    </div>
+
+                                    <div class="mt-auto d-flex flex-column gap-3">
+                                        
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="material-symbols-outlined text-white-60" style="font-size: 1.25rem;">schedule</span>
+                                            <p class="text-white-60 fw-semibold small mb-0">Sessões Disponíveis</p>
+                                        </div>
+
+                                        <div class="d-flex flex-wrap gap-2">
+                                            @if (item.Sessoes != null && item.Sessoes.Any())
+                                            {
+                                                @foreach (var sessao in item.Sessoes)
+                                                {
+                                                    <div class="session-badge">
+                                                        @sessao.Hora.ToString("HH:mm")
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span class="text-primary-custom small fw-medium">Sem sessões disponíveis</span>
+                                            }
+                                        </div>
+
+                                        <div class="mt-2">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <a asp-controller="Reservas" asp-action="Criar" asp-route-filmeId="@item.Id"
+                                                   class="btn btn-primary-custom shadow-sm d-inline-flex align-items-center justify-content-center w-100 w-md-auto">
+                                                    🎟️ Reservar Bilhete
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Account" asp-action="Login"
+                                                   class="btn btn-outline-custom d-inline-flex align-items-center justify-content-center w-100 w-md-auto">
+                                                    🔒 Login para Reservar
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (!Model.Any())
+                    {
+                        <div class="text-center py-5">
+                            <p class="text-white-60">Nenhum filme em cartaz no momento.</p>
+                        </div>
+                    }
+                </section>
+            </main>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
